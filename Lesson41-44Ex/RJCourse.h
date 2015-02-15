@@ -15,7 +15,7 @@
 @interface RJCourse : RJObject
 
 @property (nonatomic, retain) NSString * field;
-@property (nonatomic, retain) UNKNOWN_TYPE name;
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString * object;
 @property (nonatomic, retain) RJProfessor *professor;
 @property (nonatomic, retain) NSSet *students;
