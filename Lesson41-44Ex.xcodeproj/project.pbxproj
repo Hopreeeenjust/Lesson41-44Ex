@@ -9,11 +9,19 @@
 /* Begin PBXBuildFile section */
 		E0393E461A90F2F5007C0A1A /* RJDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E451A90F2F5007C0A1A /* RJDataManager.m */; };
 		E0393E491A90F7D5007C0A1A /* RJUniversitiyController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E481A90F7D5007C0A1A /* RJUniversitiyController.m */; };
-		E0393E871A9125A6007C0A1A /* RJCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E861A9125A6007C0A1A /* RJCourse.m */; };
-		E0393E8A1A9125A7007C0A1A /* RJStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E891A9125A7007C0A1A /* RJStudent.m */; };
-		E0393E8D1A9125A7007C0A1A /* RJProfessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E8C1A9125A7007C0A1A /* RJProfessor.m */; };
-		E0393E901A9125A7007C0A1A /* RJObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E8F1A9125A7007C0A1A /* RJObject.m */; };
-		E0393E931A9125A7007C0A1A /* RJUniversity.m in Sources */ = {isa = PBXBuildFile; fileRef = E0393E921A9125A7007C0A1A /* RJUniversity.m */; };
+		E0393E9F1A912CBF007C0A1A /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = E0393E9D1A912CBF007C0A1A /* 1.png */; };
+		E0393EA01A912CBF007C0A1A /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0393E9E1A912CBF007C0A1A /* 2.png */; };
+		E0A775B41A91F42300DF60CD /* RJCourseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775B31A91F42300DF60CD /* RJCourseController.m */; };
+		E0A775B81A91F45E00DF60CD /* RJStudentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775B71A91F45E00DF60CD /* RJStudentController.m */; };
+		E0A775BB1A91F47F00DF60CD /* RJProfessorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775BA1A91F47F00DF60CD /* RJProfessorController.m */; };
+		E0A775BF1A92247C00DF60CD /* RJStudentProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775BE1A92247C00DF60CD /* RJStudentProfileController.m */; };
+		E0A775C21A92545800DF60CD /* RJStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775C11A92545800DF60CD /* RJStudent.m */; };
+		E0A775C51A92545800DF60CD /* RJUniversity.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775C41A92545800DF60CD /* RJUniversity.m */; };
+		E0A775C81A92545800DF60CD /* RJCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775C71A92545800DF60CD /* RJCourse.m */; };
+		E0A775CB1A92545800DF60CD /* RJObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775CA1A92545800DF60CD /* RJObject.m */; };
+		E0A775CE1A92545800DF60CD /* RJProfessor.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775CD1A92545800DF60CD /* RJProfessor.m */; };
+		E0A775D41A92706900DF60CD /* RJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775D31A92706900DF60CD /* RJTableViewCell.m */; };
+		E0A775D81A9284B800DF60CD /* RJStudentInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A775D71A9284B800DF60CD /* RJStudentInfoCell.m */; };
 		E0E206421A90CF3E009048B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E206411A90CF3E009048B1 /* main.m */; };
 		E0E206451A90CF3E009048B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E206441A90CF3E009048B1 /* AppDelegate.m */; };
 		E0E206481A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0E206461A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld */; };
@@ -39,16 +47,30 @@
 		E0393E451A90F2F5007C0A1A /* RJDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJDataManager.m; sourceTree = "<group>"; };
 		E0393E471A90F7D5007C0A1A /* RJUniversitiyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJUniversitiyController.h; sourceTree = "<group>"; };
 		E0393E481A90F7D5007C0A1A /* RJUniversitiyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJUniversitiyController.m; sourceTree = "<group>"; };
-		E0393E851A9125A6007C0A1A /* RJCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCourse.h; sourceTree = "<group>"; };
-		E0393E861A9125A6007C0A1A /* RJCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCourse.m; sourceTree = "<group>"; };
-		E0393E881A9125A7007C0A1A /* RJStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudent.h; sourceTree = "<group>"; };
-		E0393E891A9125A7007C0A1A /* RJStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudent.m; sourceTree = "<group>"; };
-		E0393E8B1A9125A7007C0A1A /* RJProfessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProfessor.h; sourceTree = "<group>"; };
-		E0393E8C1A9125A7007C0A1A /* RJProfessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProfessor.m; sourceTree = "<group>"; };
-		E0393E8E1A9125A7007C0A1A /* RJObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJObject.h; sourceTree = "<group>"; };
-		E0393E8F1A9125A7007C0A1A /* RJObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJObject.m; sourceTree = "<group>"; };
-		E0393E911A9125A7007C0A1A /* RJUniversity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJUniversity.h; sourceTree = "<group>"; };
-		E0393E921A9125A7007C0A1A /* RJUniversity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJUniversity.m; sourceTree = "<group>"; };
+		E0393E9D1A912CBF007C0A1A /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		E0393E9E1A912CBF007C0A1A /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		E0A775B21A91F42300DF60CD /* RJCourseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCourseController.h; sourceTree = "<group>"; };
+		E0A775B31A91F42300DF60CD /* RJCourseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCourseController.m; sourceTree = "<group>"; };
+		E0A775B61A91F45E00DF60CD /* RJStudentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudentController.h; sourceTree = "<group>"; };
+		E0A775B71A91F45E00DF60CD /* RJStudentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudentController.m; sourceTree = "<group>"; };
+		E0A775B91A91F47F00DF60CD /* RJProfessorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProfessorController.h; sourceTree = "<group>"; };
+		E0A775BA1A91F47F00DF60CD /* RJProfessorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProfessorController.m; sourceTree = "<group>"; };
+		E0A775BD1A92247C00DF60CD /* RJStudentProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudentProfileController.h; sourceTree = "<group>"; };
+		E0A775BE1A92247C00DF60CD /* RJStudentProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudentProfileController.m; sourceTree = "<group>"; };
+		E0A775C01A92545800DF60CD /* RJStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudent.h; sourceTree = "<group>"; };
+		E0A775C11A92545800DF60CD /* RJStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudent.m; sourceTree = "<group>"; };
+		E0A775C31A92545800DF60CD /* RJUniversity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJUniversity.h; sourceTree = "<group>"; };
+		E0A775C41A92545800DF60CD /* RJUniversity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJUniversity.m; sourceTree = "<group>"; };
+		E0A775C61A92545800DF60CD /* RJCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCourse.h; sourceTree = "<group>"; };
+		E0A775C71A92545800DF60CD /* RJCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCourse.m; sourceTree = "<group>"; };
+		E0A775C91A92545800DF60CD /* RJObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJObject.h; sourceTree = "<group>"; };
+		E0A775CA1A92545800DF60CD /* RJObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJObject.m; sourceTree = "<group>"; };
+		E0A775CC1A92545800DF60CD /* RJProfessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProfessor.h; sourceTree = "<group>"; };
+		E0A775CD1A92545800DF60CD /* RJProfessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProfessor.m; sourceTree = "<group>"; };
+		E0A775D21A92706900DF60CD /* RJTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewCell.h; sourceTree = "<group>"; };
+		E0A775D31A92706900DF60CD /* RJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewCell.m; sourceTree = "<group>"; };
+		E0A775D61A9284B800DF60CD /* RJStudentInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudentInfoCell.h; sourceTree = "<group>"; };
+		E0A775D71A9284B800DF60CD /* RJStudentInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudentInfoCell.m; sourceTree = "<group>"; };
 		E0E2063C1A90CF3E009048B1 /* Lesson41-44Ex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lesson41-44Ex.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E206401A90CF3E009048B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E206411A90CF3E009048B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -86,18 +108,62 @@
 		E0393E4A1A910759007C0A1A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E0393E8E1A9125A7007C0A1A /* RJObject.h */,
-				E0393E8F1A9125A7007C0A1A /* RJObject.m */,
-				E0393E911A9125A7007C0A1A /* RJUniversity.h */,
-				E0393E921A9125A7007C0A1A /* RJUniversity.m */,
-				E0393E8B1A9125A7007C0A1A /* RJProfessor.h */,
-				E0393E8C1A9125A7007C0A1A /* RJProfessor.m */,
-				E0393E881A9125A7007C0A1A /* RJStudent.h */,
-				E0393E891A9125A7007C0A1A /* RJStudent.m */,
-				E0393E851A9125A6007C0A1A /* RJCourse.h */,
-				E0393E861A9125A6007C0A1A /* RJCourse.m */,
+				E0A775CC1A92545800DF60CD /* RJProfessor.h */,
+				E0A775CD1A92545800DF60CD /* RJProfessor.m */,
+				E0A775C91A92545800DF60CD /* RJObject.h */,
+				E0A775CA1A92545800DF60CD /* RJObject.m */,
+				E0A775C61A92545800DF60CD /* RJCourse.h */,
+				E0A775C71A92545800DF60CD /* RJCourse.m */,
+				E0A775C31A92545800DF60CD /* RJUniversity.h */,
+				E0A775C41A92545800DF60CD /* RJUniversity.m */,
+				E0A775C01A92545800DF60CD /* RJStudent.h */,
+				E0A775C11A92545800DF60CD /* RJStudent.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		E0393E9C1A912CBF007C0A1A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E0393E9D1A912CBF007C0A1A /* 1.png */,
+				E0393E9E1A912CBF007C0A1A /* 2.png */,
+			);
+			path = Images;
+			sourceTree = SOURCE_ROOT;
+		};
+		E0A775B51A91F42F00DF60CD /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0393E471A90F7D5007C0A1A /* RJUniversitiyController.h */,
+				E0393E481A90F7D5007C0A1A /* RJUniversitiyController.m */,
+				E0A775B61A91F45E00DF60CD /* RJStudentController.h */,
+				E0A775B71A91F45E00DF60CD /* RJStudentController.m */,
+				E0A775B21A91F42300DF60CD /* RJCourseController.h */,
+				E0A775B31A91F42300DF60CD /* RJCourseController.m */,
+				E0A775B91A91F47F00DF60CD /* RJProfessorController.h */,
+				E0A775BA1A91F47F00DF60CD /* RJProfessorController.m */,
+			);
+			name = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		E0A775BC1A92244400DF60CD /* Adding objects */ = {
+			isa = PBXGroup;
+			children = (
+				E0A775BD1A92247C00DF60CD /* RJStudentProfileController.h */,
+				E0A775BE1A92247C00DF60CD /* RJStudentProfileController.m */,
+			);
+			name = "Adding objects";
+			sourceTree = "<group>";
+		};
+		E0A775D51A9277E700DF60CD /* CustomDynamicCell */ = {
+			isa = PBXGroup;
+			children = (
+				E0A775D61A9284B800DF60CD /* RJStudentInfoCell.h */,
+				E0A775D71A9284B800DF60CD /* RJStudentInfoCell.m */,
+				E0A775D21A92706900DF60CD /* RJTableViewCell.h */,
+				E0A775D31A92706900DF60CD /* RJTableViewCell.m */,
+			);
+			name = CustomDynamicCell;
 			sourceTree = "<group>";
 		};
 		E0E206331A90CF3E009048B1 = {
@@ -121,6 +187,9 @@
 		E0E2063E1A90CF3E009048B1 /* Lesson41-44Ex */ = {
 			isa = PBXGroup;
 			children = (
+				E0A775D51A9277E700DF60CD /* CustomDynamicCell */,
+				E0A775BC1A92244400DF60CD /* Adding objects */,
+				E0A775B51A91F42F00DF60CD /* Model Controllers */,
 				E0393E4A1A910759007C0A1A /* Models */,
 				E0393E441A90F2F5007C0A1A /* RJDataManager.h */,
 				E0393E451A90F2F5007C0A1A /* RJDataManager.m */,
@@ -128,8 +197,6 @@
 				E0E206441A90CF3E009048B1 /* AppDelegate.m */,
 				E0E206491A90CF3E009048B1 /* RJCoreDataTableViewController.h */,
 				E0E2064A1A90CF3E009048B1 /* RJCoreDataTableViewController.m */,
-				E0393E471A90F7D5007C0A1A /* RJUniversitiyController.h */,
-				E0393E481A90F7D5007C0A1A /* RJUniversitiyController.m */,
 				E0E2064F1A90CF3E009048B1 /* Main.storyboard */,
 				E0E206521A90CF3E009048B1 /* Images.xcassets */,
 				E0E206541A90CF3E009048B1 /* LaunchScreen.xib */,
@@ -142,6 +209,7 @@
 		E0E2063F1A90CF3E009048B1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E0393E9C1A912CBF007C0A1A /* Images */,
 				E0E206401A90CF3E009048B1 /* Info.plist */,
 				E0E206411A90CF3E009048B1 /* main.m */,
 			);
@@ -245,7 +313,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0393E9F1A912CBF007C0A1A /* 1.png in Resources */,
 				E0E206511A90CF3E009048B1 /* Main.storyboard in Resources */,
+				E0393EA01A912CBF007C0A1A /* 2.png in Resources */,
 				E0E206561A90CF3E009048B1 /* LaunchScreen.xib in Resources */,
 				E0E206531A90CF3E009048B1 /* Images.xcassets in Resources */,
 			);
@@ -265,17 +335,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A775CB1A92545800DF60CD /* RJObject.m in Sources */,
+				E0A775B81A91F45E00DF60CD /* RJStudentController.m in Sources */,
+				E0A775D81A9284B800DF60CD /* RJStudentInfoCell.m in Sources */,
+				E0A775C21A92545800DF60CD /* RJStudent.m in Sources */,
 				E0E2064B1A90CF3E009048B1 /* RJCoreDataTableViewController.m in Sources */,
-				E0393E8A1A9125A7007C0A1A /* RJStudent.m in Sources */,
-				E0393E8D1A9125A7007C0A1A /* RJProfessor.m in Sources */,
-				E0393E871A9125A6007C0A1A /* RJCourse.m in Sources */,
+				E0A775B41A91F42300DF60CD /* RJCourseController.m in Sources */,
 				E0393E491A90F7D5007C0A1A /* RJUniversitiyController.m in Sources */,
 				E0E206451A90CF3E009048B1 /* AppDelegate.m in Sources */,
-				E0393E901A9125A7007C0A1A /* RJObject.m in Sources */,
+				E0A775C81A92545800DF60CD /* RJCourse.m in Sources */,
 				E0E206481A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld in Sources */,
+				E0A775C51A92545800DF60CD /* RJUniversity.m in Sources */,
 				E0E206421A90CF3E009048B1 /* main.m in Sources */,
-				E0393E931A9125A7007C0A1A /* RJUniversity.m in Sources */,
+				E0A775D41A92706900DF60CD /* RJTableViewCell.m in Sources */,
+				E0A775BF1A92247C00DF60CD /* RJStudentProfileController.m in Sources */,
 				E0393E461A90F2F5007C0A1A /* RJDataManager.m in Sources */,
+				E0A775BB1A91F47F00DF60CD /* RJProfessorController.m in Sources */,
+				E0A775CE1A92545800DF60CD /* RJProfessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

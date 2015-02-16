@@ -10,4 +10,6 @@
 
 @interface RJUniversitiyController : RJCoreDataTableViewController
 
+- (IBAction)actionAddUniversity:(id)sender;
+
 @end

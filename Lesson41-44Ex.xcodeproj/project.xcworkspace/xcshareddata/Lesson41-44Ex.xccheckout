@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>102DFBC7-A52C-4C2D-8B66-87B413E4E2B0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Lesson41-44Ex</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CE62E83E582390C4040C3A92BCE46C78124C1E72</key>
+		<string>https://github.com/Hopreeeenjust/Lesson41-44Ex</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lesson41-44Ex.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CE62E83E582390C4040C3A92BCE46C78124C1E72</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Hopreeeenjust/Lesson41-44Ex</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CE62E83E582390C4040C3A92BCE46C78124C1E72</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CE62E83E582390C4040C3A92BCE46C78124C1E72</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Lesson41-44Ex</string>
+		</dict>
+	</array>
+</dict>
+</plist>

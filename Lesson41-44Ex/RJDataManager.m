@@ -8,6 +8,36 @@
 
 #import "RJDataManager.h"
 #import "RJCoreDataTableViewController.h"
+#import "RJUniversity.h"
+#import "RJStudent.h"
+#import "RJCourse.h"
+
+static NSString* firstNames[] = {
+    @"Tran", @"Lenore", @"Bud", @"Fredda", @"Katrice",
+    @"Clyde", @"Hildegard", @"Vernell", @"Nellie", @"Rupert",
+    @"Billie", @"Tamica", @"Crystle", @"Kandi", @"Caridad",
+    @"Vanetta", @"Taylor", @"Pinkie", @"Ben", @"Rosanna",
+    @"Eufemia", @"Britteny", @"Ramon", @"Jacque", @"Telma",
+    @"Colton", @"Monte", @"Pam", @"Tracy", @"Tresa",
+    @"Willard", @"Mireille", @"Roma", @"Elise", @"Trang",
+    @"Ty", @"Pierre", @"Floyd", @"Savanna", @"Arvilla",
+    @"Whitney", @"Denver", @"Norbert", @"Meghan", @"Tandra",
+    @"Jenise", @"Brent", @"Elenor", @"Sha", @"Jessie"
+};
+
+static NSString* lastNames[] = {
+    
+    @"Farrah", @"Laviolette", @"Heal", @"Sechrest", @"Roots",
+    @"Homan", @"Starns", @"Oldham", @"Yocum", @"Mancia",
+    @"Prill", @"Lush", @"Piedra", @"Castenada", @"Warnock",
+    @"Vanderlinden", @"Simms", @"Gilroy", @"Brann", @"Bodden",
+    @"Lenz", @"Gildersleeve", @"Wimbish", @"Bello", @"Beachy",
+    @"Jurado", @"William", @"Beaupre", @"Dyal", @"Doiron",
+    @"Plourde", @"Bator", @"Krause", @"Odriscoll", @"Corby",
+    @"Waltman", @"Michaud", @"Kobayashi", @"Sherrick", @"Woolfolk",
+    @"Holladay", @"Hornback", @"Moler", @"Bowles", @"Libbey",
+    @"Spano", @"Folson", @"Arguelles", @"Burke", @"Rook"
+};
 
 @implementation RJDataManager
 
@@ -18,6 +48,28 @@
         manager = [RJDataManager new];
     });
     return manager;
+}
+
+#pragma mark - Adding objects 
+
+- (RJUniversity *)addUniversity {
+    RJUniversity *university = [NSEntityDescription insertNewObjectForEntityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
+    university.name = @"ONPU";
+    return university;
+}
+
+- (RJStudent *)addRandomStudent {
+    RJStudent *student = [NSEntityDescription insertNewObjectForEntityForName:@"RJStudent" inManagedObjectContext:self.managedObjectContext];
+    student.score = @((float)arc4random_uniform(201) / 100.f + 2.f);
+    student.firstName = firstNames[arc4random_uniform(50)];
+    student.lastName = lastNames[arc4random_uniform(50)];
+    return student;
+}
+
+- (RJCourse *)addCourseWithName:(NSString *)name {
+    RJCourse *course = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    course.name = name;
+    return course;
 }
 
 #pragma mark - Core Data stack
@@ -97,6 +149,27 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             NSLog(@"abort");
             abort();
+        }
+    }
+}
+
+- (void)a {
+    NSArray *cources = @[[self addCourseWithName:@"iOS"],
+                         [self addCourseWithName:@"Android"],
+                         [self addCourseWithName:@"PHP"],
+                         [self addCourseWithName:@"Javascript"],
+                         [self addCourseWithName:@"HTML"]];
+    RJUniversity *university = [self addUniversity];
+    [university addCourses:[NSSet setWithArray:cources]];
+    for (int i = 0; i < 100; i++) {
+        RJStudent *student = [self addRandomStudent];
+        [university addStudentsObject:student];
+        NSInteger number = arc4random_uniform(5) + 1;
+        while ([student.courses count] < number) {
+            RJCourse *course = [cources objectAtIndex:arc4random_uniform(5)];
+            if (![student.courses containsObject:course]) {
+                [student addCoursesObject:course];
+            }
         }
     }
 }

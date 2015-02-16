@@ -18,7 +18,7 @@
         <relationship name="universities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RJUniversity" inverseName="professors" inverseEntity="RJUniversity" syncable="YES"/>
     </entity>
     <entity name="RJStudent" representedClassName="RJStudent" parentEntity="RJObject" syncable="YES">
-        <attribute name="firstName" optional="YES" attributeType="String" minValueString="3" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" minValueString="2" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RJCourse" inverseName="students" inverseEntity="RJCourse" syncable="YES"/>

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class RJUniversity;
+
 @interface RJDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -19,6 +21,8 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 + (RJDataManager *)sharedManager;
+
+- (void)a;
 
 
 @end
