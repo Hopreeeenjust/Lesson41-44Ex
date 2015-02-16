@@ -9,6 +9,7 @@
 #import "RJStudentController.h"
 #import "RJDataManager.h"
 #import "RJStudent.h"
+#import "RJUniversity.h"
 #import "RJStudentProfileController.h"
 #import "RJStudentInfoCell.h"
 
@@ -85,7 +86,7 @@
     cell.studentName.text = [NSString stringWithFormat:@"%@ %@", student.firstName, student.lastName];
     cell.studentCourses.text = [NSString stringWithFormat:@"Courses: %ld", [student.courses count]];
     cell.studentScore.text = [NSString stringWithFormat:@"Score: %.2f", [student.score floatValue]];
-    cell.studentUniversity.text = [NSString stringWithFormat:@"%@", student.university];
+    cell.studentUniversity.text = [NSString stringWithFormat:@"%@", student.university.name];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -97,7 +98,7 @@
 #pragma mark - UITableViewDelegate
 
 - (RJStudentInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"StudentInfo";
+    static NSString *identifier = @"StudentCell";
     RJStudentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[RJStudentInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
