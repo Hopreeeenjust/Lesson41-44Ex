@@ -153,6 +153,13 @@ static NSString* lastNames[] = {
     }
 }
 
+- (void)updateContext {
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        [managedObjectContext updatedObjects];
+    }
+}
+
 - (void)a {
     NSArray *cources = @[[self addCourseWithName:@"iOS"],
                          [self addCourseWithName:@"Android"],

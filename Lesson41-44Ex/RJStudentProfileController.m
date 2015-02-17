@@ -9,16 +9,32 @@
 #import "RJStudentProfileController.h"
 #import "RJStudent.h"
 #import "RJDataManager.h"
-#import "RJTableViewCell.h"
+#import "RJUniversitySelectionController.h"
+#import "RJCoursesSelectionController.h"
+#import "RJCourse.h"
 
-@interface RJStudentProfileController () <UITableViewDataSource, UITableViewDelegate>
+typedef NS_ENUM(NSInteger, RJFieldType) {
+    RJFieldTypeNameField = 0,
+    RJFieldTypeSurnameField,
+    RJFieldTypeIntScoreField,
+    RJFieldTypeDecimalScoreField,
+    RJFieldTypeUniversityField,
+};
+
+@interface RJStudentProfileController () <UITableViewDataSource, UITableViewDelegate, RJUniversityDelegate, RJCourseDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) UITextField *textField;
+
 @property (strong, nonatomic) RJTableViewCell *nameCell;
 @property (strong, nonatomic) RJTableViewCell *surnameCell;
 @property (strong, nonatomic) RJTableViewCell *scoreCell;
 @property (strong, nonatomic) RJTableViewCell *universityCell;
 
+@property (strong, nonatomic) NSString *chosenUniversity;
+@property (strong, nonatomic) NSIndexPath *chosenIndexPath;
+@property (strong, nonatomic) NSArray *universities;
+@property (strong, nonatomic) NSArray *courses;      //all courses for selected university
+@property (strong, nonatomic) NSArray *indexPathForChosenCourses;
+@property (strong, nonatomic) NSArray *chosenCourses;    //chosen courses by student
 @end
 
 @implementation RJStudentProfileController
@@ -27,13 +43,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.universities = [NSArray new];
+    self.chosenCourses = [NSArray new];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    /*UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [blurView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    blurView.frame = self.backgroundView.bounds;
+    [self.backgroundView addSubview:blurView];*/
+//    self.universityCell.universityField.text = self.university;
+    if (!self.newStudent) {
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[descriptor]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - NSManagedObjectContext
@@ -48,12 +75,22 @@
 #pragma mark - Actions
 
 - (IBAction)actionDoneButtonPressed:(id)sender {
-    RJStudent *student = [NSEntityDescription insertNewObjectForEntityForName:@"RJStudent" inManagedObjectContext:self.managedObjectContext];
-    student.firstName = self.nameCell.firstNameField.text;
-    student.lastName = self.surnameCell.lastNameField.text;
-    student.score = [NSNumber numberWithFloat:[self.scoreCell.intScoreField.text integerValue] + [self.scoreCell.decimalScoreField.text floatValue] / 100];
-//    student.university = 
-    [[RJDataManager sharedManager] saveContext];
+    if (self.newStudent) {
+        RJStudent *student = [NSEntityDescription insertNewObjectForEntityForName:@"RJStudent" inManagedObjectContext:self.managedObjectContext];
+        student.firstName = self.nameCell.firstNameField.text;
+        student.lastName = self.surnameCell.lastNameField.text;
+        student.score = [NSNumber numberWithFloat:[self.scoreCell.intScoreField.text integerValue] + [self.scoreCell.decimalScoreField.text floatValue] / 100];
+        student.university = [self.universities objectAtIndex:self.chosenIndexPath.row];
+        student.courses = [NSSet setWithArray:self.chosenCourses];
+        [[RJDataManager sharedManager] saveContext];
+    } else {
+        self.student.firstName = self.nameCell.firstNameField.text;
+        self.student.lastName = self.surnameCell.lastNameField.text;
+        self.student.score = [NSNumber numberWithFloat:[self.scoreCell.intScoreField.text integerValue] + [self.scoreCell.decimalScoreField.text floatValue] / 100];
+        self.student.university = [self.universities objectAtIndex:self.chosenIndexPath.row];
+        self.student.courses = [NSSet setWithArray:self.chosenCourses];
+        [[RJDataManager sharedManager] saveContext];
+    }
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -67,7 +104,7 @@
     if (section == 0) {
         return 5;
     } else {
-        return [self.student.courses count];
+        return [self.chosenCourses count];
     }
 }
 
@@ -84,6 +121,8 @@
             if (!cell) {
                 cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:firstNameField];
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.firstNameField.text = self.firstName;
             self.nameCell = cell;
             return cell;
         } else if (indexPath.row == 1) {
@@ -91,12 +130,19 @@
             if (!cell) {
                 cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:lastNameField];
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             self.surnameCell = cell;
+            cell.lastNameField.text = self.lastName;
             return cell;
         } else if (indexPath.row == 2) {
             RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:scoreField];
             if (!cell) {
                 cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:scoreField];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (!self.newStudent) {
+                cell.intScoreField.text = [NSString stringWithFormat:@"%ld", [self.score integerValue]];
+                cell.decimalScoreField.text = [[NSString stringWithFormat:@"%.2f", [self.score floatValue]] substringFromIndex:2];
             }
             self.scoreCell = cell;
             return cell;
@@ -105,6 +151,8 @@
             if (!cell) {
                 cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:universityField];
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.universityField.text = self.university;
             self.universityCell = cell;
             return cell;
         } else if (indexPath.row == 4) {
@@ -112,13 +160,17 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:newCourseField];
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             return cell;
         }
     } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:coursesField];
+        RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:coursesField];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:coursesField];
+            cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:coursesField];
         }
+        RJCourse *course = [self.chosenCourses objectAtIndex:indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.coursesLabel.text = course.name;
         return cell;
     }
     return nil;
@@ -149,23 +201,130 @@
     return headerView;
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (void) textFieldDidEndEditing:(UITextField *)textField {
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.reuseIdentifier isEqualToString:@"NewCourse"]) {
+        if (!self.chosenUniversity) {
+            [self showChooseUniversityAlert];
+        } else {
+            NSFetchRequest *request = [NSFetchRequest new];
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+            [request setEntity:entity];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"university.name == %@", self.chosenUniversity];
+            [request setPredicate:predicate];
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+            NSArray *sortDescriptors = @[sortDescriptor];
+            [request setSortDescriptors:sortDescriptors];
+            self.courses = [self.managedObjectContext executeFetchRequest:request error:nil];
+            RJCoursesSelectionController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseCourses"];
+            vc.previousController = self;
+            vc.delegate = self;
+            vc.courses = self.courses;
+            if (self.chosenCourses) {
+                vc.indexPathForChosenCourses = self.indexPathForChosenCourses;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
+#pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return YES;
+    if (textField.tag == RJFieldTypeUniversityField) {
+        NSFetchRequest *request = [NSFetchRequest new];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
+        [request setEntity:entity];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        NSArray *sortDescriptors = @[sortDescriptor];
+        [request setSortDescriptors:sortDescriptors];
+        self.universities = [self.managedObjectContext executeFetchRequest:request error:nil];
+        RJUniversitySelectionController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseUniversity"];
+        vc.previousController = self;
+        vc.delegate = self;
+        vc.universities = self.universities;
+        if (self.chosenUniversity) {
+            vc.lastIndexPath = self.chosenIndexPath;
+        }
+        [self.navigationController pushViewController:vc animated:YES];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    if (textField == self.scoreCell.decimalScoreField) {
-//        return [textField resignFirstResponder];
-//    } else {
-//        return [textField resignFirstResponder];
-//    }
+    if (textField.tag == RJFieldTypeDecimalScoreField) {
+        return [textField resignFirstResponder];
+    } else {
+        return [textField resignFirstResponder] && [[self.tableView viewWithTag:textField.tag +1] becomeFirstResponder];
+    }
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.tag == RJFieldTypeIntScoreField) {
+        return [self setScoreMaskForTextField:textField InRange:range replacementString:string withMaxLenth:1];
+    } else if (textField.tag == RJFieldTypeDecimalScoreField) {
+        return [self setScoreMaskForTextField:textField InRange:range replacementString:string withMaxLenth:2];
+    } else {
+        return YES;
+    }
+}
+
+#pragma mark - Methods
+
+- (BOOL)setScoreMaskForTextField:(UITextField *)textField InRange:(NSRange)range replacementString:(NSString *)string withMaxLenth:(NSInteger)maxLenth{
+    NSCharacterSet *validationSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSArray *components = [string componentsSeparatedByCharactersInSet:validationSet];
+    
+    if ([components count] > 1) {
+        return NO;
+    }
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    NSArray *validComponents = [newString componentsSeparatedByCharactersInSet:validationSet];
+    newString = [validComponents componentsJoinedByString:@""];
+    
+    if ([newString length] > maxLenth) {
+        return  NO;
+    }
+    
+    return YES;
+}
+
+- (void)showChooseUniversityAlert {
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Attention" message:@"Please, choose university first" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [ac addAction:ok];
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+#pragma mark - RJUniversityDelegate
+
+- (void)didChooseUniversity:(NSString *)university atIndexPath:(NSIndexPath *)indexPath {
+    if (![self.chosenUniversity isEqualToString:university]) {
+        [[self mutableArrayValueForKey:@"chosenCourses"] removeAllObjects];
+        if (self.indexPathForChosenCourses) {
+            [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] removeAllObjects];
+        }
+    }
+    self.chosenUniversity = university;
+    self.universityCell.universityField.text = university;
+    self.chosenIndexPath = indexPath;
+}
+
+#pragma mark - RJCourseDelegate
+
+- (void)didChooseCoursesAtIndexPath:(NSArray *)indexPaths {
+    [[self mutableArrayValueForKey:@"chosenCourses"] removeAllObjects];
+    self.indexPathForChosenCourses = indexPaths;
+    for (NSIndexPath *indexPath in indexPaths) {
+        [[self mutableArrayValueForKey:@"chosenCourses"] addObject:[self.courses objectAtIndex:indexPath.row]];
+    }
+    [self.tableView reloadData];
 }
 
 @end

@@ -14,7 +14,7 @@
 #import "RJStudentInfoCell.h"
 
 @interface RJStudentController ()
-@property (strong, nonatomic) RJStudent *student;
+//@property (strong, nonatomic) RJStudent *student;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
@@ -36,6 +36,7 @@
 
 - (IBAction)actionAddStudent:(id)sender {
      RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
+    vc.newStudent = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
 //    [[RJDataManager sharedManager] addUniversity];
@@ -106,5 +107,20 @@
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RJStudent *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
+    vc.student = student;
+    vc.newStudent = NO;
+    vc.firstName = student.firstName;
+    vc.lastName = student.lastName;
+    vc.score = student.score;
+    vc.university = student.university.name;
+    vc.coursesSet = student.courses;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 
 @end

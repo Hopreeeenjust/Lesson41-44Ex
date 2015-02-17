@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *intScoreField;
 @property (weak, nonatomic) IBOutlet UITextField *decimalScoreField;
 @property (weak, nonatomic) IBOutlet UITextField *universityField;
+@property (weak, nonatomic) IBOutlet UILabel *coursesLabel;
 
 @end

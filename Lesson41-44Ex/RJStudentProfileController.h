@@ -7,12 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RJTableViewCell.h"
 
 @class RJStudent;
 
 @interface RJStudentProfileController : UITableViewController <UITextFieldDelegate>
 @property (strong, nonatomic) RJStudent *student;
 
-- (IBAction)actionDoneButtonPressed:(id)sender;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSNumber *score;
+@property (strong, nonatomic) NSString *university;
+@property (strong, nonatomic) NSSet *coursesSet;
+@property (assign, nonatomic) BOOL newStudent;
 
+- (IBAction)actionDoneButtonPressed:(id)sender;
 @end
