@@ -19,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
+    if (self.lastIndexPath) {
+        self.university = [self.universities objectAtIndex:self.lastIndexPath.row];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,7 +52,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    self.university = cell.textLabel.text;
+    self.university = [self.universities objectAtIndex:indexPath.row];
     self.lastIndexPath = indexPath;
 }
 

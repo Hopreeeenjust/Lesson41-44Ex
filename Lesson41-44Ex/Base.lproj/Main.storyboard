@@ -441,6 +441,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="jZH-BK-Ykz">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="6Fp-Oy-RmV">
+                                    <rect key="frame" x="8" y="8" width="359" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="All students"/>
+                                        <segment title="Students by universities"/>
+                                    </segments>
+                                    <color key="tintColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="actionControllStateChanged:" destination="2tA-zC-G3S" eventType="valueChanged" id="Lwd-uk-t7K"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" rowHeight="64" id="pmc-pX-TEB" customClass="RJStudentInfoCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -488,6 +507,44 @@
                                     <outlet property="studentUniversity" destination="feY-Oi-3Os" id="Y6U-G6-Uma"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCellInUniversitySection" rowHeight="64" id="eDG-Eo-8Ml" customClass="RJStudentInfoCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eDG-Eo-8Ml" id="iAF-Wr-bk5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LPj-Zu-Sei">
+                                            <rect key="frame" x="80" y="21" width="144" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nt2-Dp-I3i">
+                                            <rect key="frame" x="239" y="8" width="115" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact2.png" id="EEt-wU-VHT">
+                                            <rect key="frame" x="8" y="0.0" width="64" height="64"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ch-Px-8l8">
+                                            <rect key="frame" x="239" y="34" width="115" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="studentCourses" destination="3Ch-Px-8l8" id="NDW-9s-3Oq"/>
+                                    <outlet property="studentName" destination="LPj-Zu-Sei" id="Lim-bD-in9"/>
+                                    <outlet property="studentScore" destination="Nt2-Dp-I3i" id="g7t-17-TgX"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="2tA-zC-G3S" id="EdC-QY-zzu"/>
@@ -503,6 +560,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="6Fp-Oy-RmV" id="9d2-uG-qcp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3e-FT-LQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -745,7 +805,7 @@
                         <color key="barTintColor" red="0.90093074839999998" green="0.93025808789999997" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="2tA-zC-G3S" kind="relationship" relationship="rootViewController" id="LUq-z6-lJI"/>
+                        <segue destination="2tA-zC-G3S" kind="relationship" relationship="rootViewController" id="FFH-L7-GyY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JjA-KP-qKE" userLabel="First Responder" sceneMemberID="firstResponder"/>

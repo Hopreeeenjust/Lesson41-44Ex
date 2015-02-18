@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class RJUniversity;
 @protocol RJUniversityDelegate;
 
 @interface RJUniversitySelectionController : UITableViewController
@@ -16,11 +17,11 @@
 
 @property (weak, nonatomic) id <RJUniversityDelegate> delegate;
 @property (strong, nonatomic) NSIndexPath *lastIndexPath;
-@property (strong, nonatomic) NSString *university;
+@property (strong, nonatomic) RJUniversity *university;
 
 - (IBAction)actionSaveButtonPushed:(UIBarButtonItem *)sender;
 @end
 
 @protocol RJUniversityDelegate <NSObject>
-- (void)didChooseUniversity:(NSString *)university atIndexPath:(NSIndexPath *)indexPath;
+- (void)didChooseUniversity:(RJUniversity *)university atIndexPath:(NSIndexPath *)indexPath;
 @end

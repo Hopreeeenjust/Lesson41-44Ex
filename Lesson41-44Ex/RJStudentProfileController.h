@@ -10,6 +10,7 @@
 #import "RJTableViewCell.h"
 
 @class RJStudent;
+@class RJUniversity;
 
 @interface RJStudentProfileController : UITableViewController <UITextFieldDelegate>
 @property (strong, nonatomic) RJStudent *student;
@@ -17,7 +18,7 @@
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSNumber *score;
-@property (strong, nonatomic) NSString *university;
+@property (strong, nonatomic) RJUniversity *university;
 @property (strong, nonatomic) NSSet *coursesSet;
 @property (assign, nonatomic) BOOL newStudent;
 

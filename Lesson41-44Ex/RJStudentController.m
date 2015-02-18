@@ -14,8 +14,9 @@
 #import "RJStudentInfoCell.h"
 
 @interface RJStudentController ()
-//@property (strong, nonatomic) RJStudent *student;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSString *sectionNameKeyPath;
+@property (strong, nonatomic) NSSortDescriptor *universityDescriptor;
 @end
 
 @implementation RJStudentController
@@ -25,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.sectionNameKeyPath = nil;
+    self.universityDescriptor = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,13 +37,24 @@
 
 #pragma mark - Actions
 
-- (IBAction)actionAddStudent:(id)sender {
+- (IBAction)actionAddStudent:(UIBarButtonItem *)sender {
      RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
     vc.newStudent = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    [[RJDataManager sharedManager] addUniversity];
-//    [[RJDataManager sharedManager] saveContext];
+}
+
+- (IBAction)actionControllStateChanged:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        [self.segmentedControl setFrame:CGRectMake(8, 8, 359, 29)];
+        self.sectionNameKeyPath = nil;
+        self.universityDescriptor = nil;
+    } else {
+        [self.segmentedControl setFrame:CGRectMake(8, 8, 344, 29)];
+        self.sectionNameKeyPath = @"university.name";
+        self.universityDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"university" ascending:YES];
+    }
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -59,14 +73,21 @@
     
     NSSortDescriptor *firstNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
     NSSortDescriptor *lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
-    NSArray *sortDescriptors = @[firstNameDescriptor, lastNameDescriptor];
+    NSArray *sortDescriptors = [NSArray new];
+
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        sortDescriptors = @[firstNameDescriptor, lastNameDescriptor];
+    } else {
+        sortDescriptors = @[self.universityDescriptor, firstNameDescriptor, lastNameDescriptor];
+    }
     
     [fetchRequest setSortDescriptors:sortDescriptors];
+    
     
     NSFetchedResultsController *aFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext
-                                          sectionNameKeyPath:nil
+                                          sectionNameKeyPath:self.sectionNameKeyPath
                                                    cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
@@ -92,20 +113,58 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo name];
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if (self.segmentedControl.selectedSegmentIndex == 1) {
+        NSFetchRequest *request = [NSFetchRequest new];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
+        [request setEntity:entity];
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+        NSArray *sortDescriptors = @[descriptor];
+        [request setSortDescriptors:sortDescriptors];
+        NSArray *universities = [self.managedObjectContext executeFetchRequest:request error:nil];
+        NSArray *indexes = [NSArray new];
+        NSString *currentLetter = nil;
+        NSMutableArray *tempArray = [NSMutableArray array];
+        for (RJUniversity *university in universities) {
+            NSString *firstLetter = [university.name substringToIndex:1];
+            if (![firstLetter isEqualToString:currentLetter]) {
+                currentLetter = firstLetter;
+                [tempArray addObject:currentLetter];
+            } else {
+                continue;
+            }
+        }
+        indexes = tempArray;
+        return indexes;
+    } else {
+        return nil;
+    }
+}
 
 #pragma mark - UITableViewDelegate
 
 - (RJStudentInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"StudentCell";
-    RJStudentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[RJStudentInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    static NSString *identifierTwo = @"StudentCellInUniversitySection";
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        RJStudentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[RJStudentInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        }
+        [self configureCell:cell atIndexPath:indexPath];
+        return cell;
+    } else {
+        RJStudentInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierTwo];
+        if (!cell) {
+            cell = [[RJStudentInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifierTwo];
+        }
+        [self configureCell:cell atIndexPath:indexPath];
+        return cell;
     }
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,7 +175,7 @@
     vc.firstName = student.firstName;
     vc.lastName = student.lastName;
     vc.score = student.score;
-    vc.university = student.university.name;
+    vc.university = student.university;
     vc.coursesSet = student.courses;
     [self.navigationController pushViewController:vc animated:YES];
 }

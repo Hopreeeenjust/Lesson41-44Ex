@@ -12,6 +12,7 @@
 #import "RJUniversitySelectionController.h"
 #import "RJCoursesSelectionController.h"
 #import "RJCourse.h"
+#import "RJUniversity.h"
 
 typedef NS_ENUM(NSInteger, RJFieldType) {
     RJFieldTypeNameField = 0,
@@ -29,7 +30,7 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
 @property (strong, nonatomic) RJTableViewCell *scoreCell;
 @property (strong, nonatomic) RJTableViewCell *universityCell;
 
-@property (strong, nonatomic) NSString *chosenUniversity;
+@property (strong, nonatomic) RJUniversity *chosenUniversity;
 @property (strong, nonatomic) NSIndexPath *chosenIndexPath;
 @property (strong, nonatomic) NSArray *universities;
 @property (strong, nonatomic) NSArray *courses;      //all courses for selected university
@@ -45,17 +46,24 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     [super viewDidLoad];
     self.universities = [NSArray new];
     self.chosenCourses = [NSArray new];
+    self.indexPathForChosenCourses = [NSArray new];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    /*UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    [blurView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    blurView.frame = self.backgroundView.bounds;
-    [self.backgroundView addSubview:blurView];*/
-//    self.universityCell.universityField.text = self.university;
+
+    self.universities = [self getAllObjectsWithEntityName:@"RJUniversity" predicate:nil andSortingKey:@"name"];
     if (!self.newStudent) {
+        self.chosenUniversity = self.university;
+        NSPredicate *coursesPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
+        self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortingKey:@"name"];
+        
         NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
         self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[descriptor]];
+        for (RJCourse *course in self.chosenCourses) {
+            NSInteger rowOfChosenCourse = [self.courses indexOfObject:course];
+            NSIndexPath *chosenCoursePath = [NSIndexPath indexPathForRow:rowOfChosenCourse inSection:0];
+            [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] addObject:chosenCoursePath];
+        }
+        NSInteger row = [self.universities indexOfObject:self.university];
+        self.chosenIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
     }
 }
 
@@ -152,7 +160,7 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
                 cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:universityField];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.universityField.text = self.university;
+            cell.universityField.text = self.university.name;
             self.universityCell = cell;
             return cell;
         } else if (indexPath.row == 4) {
@@ -202,21 +210,14 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSPredicate *coursesPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
+    self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortingKey:@"name"];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.reuseIdentifier isEqualToString:@"NewCourse"]) {
         if (!self.chosenUniversity) {
             [self showChooseUniversityAlert];
         } else {
-            NSFetchRequest *request = [NSFetchRequest new];
-            NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
-            [request setEntity:entity];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"university.name == %@", self.chosenUniversity];
-            [request setPredicate:predicate];
-            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-            NSArray *sortDescriptors = @[sortDescriptor];
-            [request setSortDescriptors:sortDescriptors];
-            self.courses = [self.managedObjectContext executeFetchRequest:request error:nil];
             RJCoursesSelectionController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseCourses"];
             vc.previousController = self;
             vc.delegate = self;
@@ -233,13 +234,6 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == RJFieldTypeUniversityField) {
-        NSFetchRequest *request = [NSFetchRequest new];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
-        [request setEntity:entity];
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-        NSArray *sortDescriptors = @[sortDescriptor];
-        [request setSortDescriptors:sortDescriptors];
-        self.universities = [self.managedObjectContext executeFetchRequest:request error:nil];
         RJUniversitySelectionController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseUniversity"];
         vc.previousController = self;
         vc.delegate = self;
@@ -302,17 +296,44 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     [self presentViewController:ac animated:YES completion:nil];
 }
 
+- (NSArray *)getAllObjectsWithEntityName:(NSString *)entityName predicate:(NSPredicate *)predicate andSortingKey:(NSString *)key {
+    NSFetchRequest *request = [NSFetchRequest new];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [request setSortDescriptors:sortDescriptors];
+    NSArray *resultArray = [self.managedObjectContext executeFetchRequest:request error:nil];
+    return resultArray;
+}
+
+- (void)saveData {
+    self.firstName = self.nameCell.firstNameField.text;
+    self.lastName = self.surnameCell.lastNameField.text;
+    self.score = [NSNumber numberWithFloat:[self.scoreCell.intScoreField.text integerValue] + [self.scoreCell.decimalScoreField.text floatValue] / 100];
+    self.university = [self.universities objectAtIndex:self.chosenIndexPath.row];
+}
+
+- (void)loadData {
+    self.nameCell.firstNameField.text = self.firstName;
+    self.surnameCell.lastNameField.text = self.lastName;
+    self.scoreCell.intScoreField.text = [NSString stringWithFormat:@"%ld", [self.score integerValue]];
+    self.scoreCell.decimalScoreField.text = [[NSString stringWithFormat:@"%.2f", [self.score floatValue]] substringFromIndex:2];
+    self.universityCell.universityField.text = self.university.name;
+}
+
 #pragma mark - RJUniversityDelegate
 
-- (void)didChooseUniversity:(NSString *)university atIndexPath:(NSIndexPath *)indexPath {
-    if (![self.chosenUniversity isEqualToString:university]) {
+- (void)didChooseUniversity:(RJUniversity *)university atIndexPath:(NSIndexPath *)indexPath {
+    if (![self.chosenUniversity isEqual:university]) {
         [[self mutableArrayValueForKey:@"chosenCourses"] removeAllObjects];
         if (self.indexPathForChosenCourses) {
             [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] removeAllObjects];
         }
     }
     self.chosenUniversity = university;
-    self.universityCell.universityField.text = university;
+    self.universityCell.universityField.text = university.name;
     self.chosenIndexPath = indexPath;
 }
 
@@ -324,7 +345,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     for (NSIndexPath *indexPath in indexPaths) {
         [[self mutableArrayValueForKey:@"chosenCourses"] addObject:[self.courses objectAtIndex:indexPath.row]];
     }
+    [self saveData];
     [self.tableView reloadData];
+    [self loadData];
 }
 
 @end

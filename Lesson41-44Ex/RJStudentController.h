@@ -9,7 +9,8 @@
 #import "RJCoreDataTableViewController.h"
 
 @interface RJStudentController : RJCoreDataTableViewController
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 - (IBAction)actionAddStudent:(id)sender;
-
+- (IBAction)actionControllStateChanged:(id)sender;
 @end
