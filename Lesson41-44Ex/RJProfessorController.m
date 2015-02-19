@@ -81,11 +81,10 @@
     RJProfessor *professor = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.professorName.text = [NSString stringWithFormat:@"%@ %@", professor.firstName, professor.lastName];
     if ([professor.courses count] == 1) {
-        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lectures on %ld course", [professor.courses count]];
+        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lecturer on %ld course", [professor.courses count]];
     } else {
-        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lectures on %ld courses", [professor.courses count]];
+        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lecturer on %ld courses", [professor.courses count]];
     }
-    cell.accessoryView.tintColor = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -102,16 +101,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    RJStudent *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
-//    vc.student = student;
-//    vc.newStudent = NO;
-//    vc.firstName = student.firstName;
-//    vc.lastName = student.lastName;
-//    vc.score = student.score;
-//    vc.university = student.university;
-//    vc.coursesSet = student.courses;
-//    [self.navigationController pushViewController:vc animated:YES];
+    RJProfessor *professor = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJProfessorProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfessorEdit"];
+    vc.professor = professor;
+    vc.newProfessor = NO;
+    vc.firstName = professor.firstName;
+    vc.lastName = professor.lastName;
+    vc.universitiesSet = professor.universities;
+    vc.coursesSet = professor.courses;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

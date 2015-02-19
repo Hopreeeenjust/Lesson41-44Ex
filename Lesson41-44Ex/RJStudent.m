@@ -19,4 +19,11 @@
 @dynamic courses;
 @dynamic university;
 
+- (NSString *)firstLetter {
+    [self willAccessValueForKey:@"firstLetter"];
+    NSString *firstLetter = [[[self firstName] substringToIndex:1] uppercaseString];
+    [self didAccessValueForKey:@"firstLetter"];
+    return firstLetter;
+}
+
 @end

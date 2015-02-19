@@ -77,20 +77,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"CourseToChoose";
+    static NSString *identifierMulti = @"CourseToChooseMulti";
     RJCourse *course = [self.courses objectAtIndex:indexPath.row];
-    RJSelectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[RJSelectionListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-    }
-    cell.label.text = course.name;
-    cell.detailLabel.text = [NSString stringWithFormat:@"Attendance: %ld", [course.students count]];
     if ([self.previousController isKindOfClass:[RJStudentProfileController class]]) {
-        cell.subTitle.text = [NSString stringWithFormat:@"Professor %@ %@", course.professor.firstName, course.professor.lastName];
+        RJSelectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[RJSelectionListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        }
+        cell.label.text = course.name;
+        if (course.professor) {
+            cell.detailLabel.text = [NSString stringWithFormat:@"Attendance: %ld", [course.students count]];
+            cell.subTitle.text = [NSString stringWithFormat:@"Professor %@ %@", course.professor.firstName, course.professor.lastName];
+        } else {
+            cell.detailLabel.text = [NSString stringWithFormat:@"Applications: %ld", [course.students count]];
+            cell.subTitle.text = @"No professor for this course yet";
+        }
+        return cell;
     } else if ([self.previousController isKindOfClass:[RJProfessorProfileController class]]) {
+        RJSelectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierMulti];
+        if (!cell) {
+            cell = [[RJSelectionListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifierMulti];
+        }
+        cell.label.text = course.name;
+        if (course.professor != nil) {
+            cell.universityLabel.text = [NSString stringWithFormat:@"Attendance: %ld", [course.students count]];
+        } else {
+            cell.universityLabel.text = [NSString stringWithFormat:@"Applications: %ld", [course.students count]];
+        }
         cell.subTitle.text = course.university.name;
+        return cell;
     }
-    return cell;
-
+    return nil;
 }
 
 @end

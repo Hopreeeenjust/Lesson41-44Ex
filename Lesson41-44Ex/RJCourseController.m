@@ -9,6 +9,7 @@
 #import "RJCourseController.h"
 #import "RJDataManager.h"
 #import "RJCourse.h"
+#import "RJCourseProfileController.h"
 
 @interface RJCourseController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -25,14 +26,14 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
 
 - (IBAction)actionAddCourse:(id)sender {
-//    [[RJDataManager sharedManager] addUniversity];
-//    [[RJDataManager sharedManager] saveContext];
+    RJCourseProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseEdit"];
+    vc.newCourse = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - NSFetchedResultsController

@@ -13,10 +13,11 @@
 #import "RJStudentProfileController.h"
 #import "RJStudentInfoCell.h"
 
-@interface RJStudentController ()
+@interface RJStudentController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSString *sectionNameKeyPath;
 @property (strong, nonatomic) NSSortDescriptor *universityDescriptor;
+@property (strong, nonatomic) NSArray *indexesForHeader;
 @end
 
 @implementation RJStudentController
@@ -26,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sectionNameKeyPath = nil;
+    self.sectionNameKeyPath = @"firstLetter";
     self.universityDescriptor = nil;
 }
 
@@ -45,11 +46,9 @@
 
 - (IBAction)actionControllStateChanged:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0) {
-        [self.segmentedControl setFrame:CGRectMake(8, 8, 359, 29)];
-        self.sectionNameKeyPath = nil;
+        self.sectionNameKeyPath = @"firstLetter";
         self.universityDescriptor = nil;
     } else {
-        [self.segmentedControl setFrame:CGRectMake(8, 8, 344, 29)];
         self.sectionNameKeyPath = @"university.name";
         self.universityDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"university" ascending:YES];
     }
@@ -118,31 +117,7 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    if (self.segmentedControl.selectedSegmentIndex == 1) {
-        NSFetchRequest *request = [NSFetchRequest new];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
-        [request setEntity:entity];
-        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-        NSArray *sortDescriptors = @[descriptor];
-        [request setSortDescriptors:sortDescriptors];
-        NSArray *universities = [self.managedObjectContext executeFetchRequest:request error:nil];
-        NSArray *indexes = [NSArray new];
-        NSString *currentLetter = nil;
-        NSMutableArray *tempArray = [NSMutableArray array];
-        for (RJUniversity *university in universities) {
-            NSString *firstLetter = [university.name substringToIndex:1];
-            if (![firstLetter isEqualToString:currentLetter]) {
-                currentLetter = firstLetter;
-                [tempArray addObject:currentLetter];
-            } else {
-                continue;
-            }
-        }
-        indexes = tempArray;
-        return indexes;
-    } else {
-        return nil;
-    }
+    return [self.fetchedResultsController sectionIndexTitles];
 }
 
 #pragma mark - UITableViewDelegate
@@ -181,11 +156,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.segmentedControl.selectedSegmentIndex == 0) {
-        return 0;
-    } else {
-        return 28;
-    }
+    return 28;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

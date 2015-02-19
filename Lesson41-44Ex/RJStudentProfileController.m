@@ -50,14 +50,13 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     self.indexPathForChosenCourses = [NSArray new];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
 
-    self.universities = [self getAllObjectsWithEntityName:@"RJUniversity" predicate:nil andSortingKey:@"name"];
+    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.universities = [self getAllObjectsWithEntityName:@"RJUniversity" predicate:nil andSortDescriptors:@[nameDescriptor]];
     if (!self.newStudent) {
         self.chosenUniversity = self.university;
         NSPredicate *coursesPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
-        self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortingKey:@"name"];
-        
-        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[descriptor]];
+        self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortDescriptors:@[nameDescriptor]];
+        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
         for (RJCourse *course in self.chosenCourses) {
             NSInteger rowOfChosenCourse = [self.courses indexOfObject:course];
             NSIndexPath *chosenCoursePath = [NSIndexPath indexPathForRow:rowOfChosenCourse inSection:0];
@@ -212,7 +211,8 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSPredicate *coursesPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
-    self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortingKey:@"name"];
+    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortDescriptors:@[nameDescriptor]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.reuseIdentifier isEqualToString:@"NewCourse"]) {
@@ -297,14 +297,12 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     [self presentViewController:ac animated:YES completion:nil];
 }
 
-- (NSArray *)getAllObjectsWithEntityName:(NSString *)entityName predicate:(NSPredicate *)predicate andSortingKey:(NSString *)key {
+- (NSArray *)getAllObjectsWithEntityName:(NSString *)entityName predicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)descriptors {
     NSFetchRequest *request = [NSFetchRequest new];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [request setEntity:entity];
     [request setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    [request setSortDescriptors:sortDescriptors];
+    [request setSortDescriptors:descriptors];
     NSArray *resultArray = [self.managedObjectContext executeFetchRequest:request error:nil];
     return resultArray;
 }
