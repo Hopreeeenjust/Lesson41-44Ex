@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RJProfessorSelectionController : UITableViewController
+@class RJProfessor;
+@protocol RJProfessorDelegate;
 
+@interface RJProfessorSelectionController : UITableViewController
+@property (strong, nonatomic) NSArray *professors;
+@property (strong, nonatomic) UITableViewController *previousController;
+
+@property (weak, nonatomic) id <RJProfessorDelegate> delegate;
+@property (strong, nonatomic) NSIndexPath *lastIndexPath;
+@property (strong, nonatomic) RJProfessor *professor;
+
+- (IBAction)actionSaveButtonPushed:(UIBarButtonItem *)sender;
+@end
+
+@protocol RJProfessorDelegate <NSObject>
+- (void)didChooseProfessor:(RJProfessor *)professor atIndexPath:(NSIndexPath *)indexPath;
 @end

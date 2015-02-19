@@ -38,6 +38,7 @@
 		E0A775DA1A928F1F00DF60CD /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A775D91A928F1F00DF60CD /* contact.png */; };
 		E0A775DC1A92905600DF60CD /* contact2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A775DB1A92905600DF60CD /* contact2.png */; };
 		E0A8A7D81A963C7400D6CC9B /* RJCourseProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A8A7D71A963C7400D6CC9B /* RJCourseProfileController.m */; };
+		E0BA30FE1A9685D0009FC802 /* RJStudentSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BA30FD1A9685D0009FC802 /* RJStudentSelectionController.m */; };
 		E0E206421A90CF3E009048B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E206411A90CF3E009048B1 /* main.m */; };
 		E0E206451A90CF3E009048B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E206441A90CF3E009048B1 /* AppDelegate.m */; };
 		E0E206481A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0E206461A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld */; };
@@ -114,6 +115,8 @@
 		E0A775DB1A92905600DF60CD /* contact2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact2.png; sourceTree = "<group>"; };
 		E0A8A7D61A963C7400D6CC9B /* RJCourseProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCourseProfileController.h; sourceTree = "<group>"; };
 		E0A8A7D71A963C7400D6CC9B /* RJCourseProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCourseProfileController.m; sourceTree = "<group>"; };
+		E0BA30FC1A9685D0009FC802 /* RJStudentSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJStudentSelectionController.h; sourceTree = "<group>"; };
+		E0BA30FD1A9685D0009FC802 /* RJStudentSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJStudentSelectionController.m; sourceTree = "<group>"; };
 		E0E2063C1A90CF3E009048B1 /* Lesson41-44Ex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lesson41-44Ex.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E206401A90CF3E009048B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0E206411A90CF3E009048B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				E08938621A9375A600C1E497 /* RJCoursesSelectionController.m */,
 				E03746E31A96700200644DAC /* RJProfessorSelectionController.h */,
 				E03746E41A96700200644DAC /* RJProfessorSelectionController.m */,
+				E0BA30FC1A9685D0009FC802 /* RJStudentSelectionController.h */,
+				E0BA30FD1A9685D0009FC802 /* RJStudentSelectionController.m */,
 			);
 			name = "Choosing from list";
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				E0E206451A90CF3E009048B1 /* AppDelegate.m in Sources */,
 				E08938631A9375A600C1E497 /* RJCoursesSelectionController.m in Sources */,
 				E0A775C81A92545800DF60CD /* RJCourse.m in Sources */,
+				E0BA30FE1A9685D0009FC802 /* RJStudentSelectionController.m in Sources */,
 				E0E206481A90CF3E009048B1 /* Lesson41_44Ex.xcdatamodeld in Sources */,
 				E03746E21A96458D00644DAC /* RJCourseProfileCell.m in Sources */,
 				E08938601A93517600C1E497 /* RJUniversitySelectionController.m in Sources */,

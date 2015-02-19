@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitle;
 @property (weak, nonatomic) IBOutlet UILabel *universityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *courseCountLabel;
 @end

@@ -105,7 +105,7 @@
             </objects>
             <point key="canvasLocation" x="2059.5" y="1103.5"/>
         </scene>
-        <!--Choose University-->
+        <!--Choose university-->
         <scene sceneID="ehS-Fj-40D">
             <objects>
                 <tableViewController storyboardIdentifier="ChooseUniversity" id="gAg-az-iF3" customClass="RJUniversitySelectionController" sceneMemberID="viewController">
@@ -126,7 +126,7 @@
                             <outlet property="delegate" destination="gAg-az-iF3" id="dCj-CR-YCE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Choose University" id="9nY-E7-Lh3">
+                    <navigationItem key="navigationItem" title="Choose university" id="9nY-E7-Lh3">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="QTM-0k-yLU">
                             <color key="tintColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -260,7 +260,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOP-Kg-6yV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497.5" y="1941.5"/>
+            <point key="canvasLocation" x="265.5" y="1926.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Rq-Vh-20W">
@@ -279,7 +279,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jte-Wh-cph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10.4" y="1942.0866666666666"/>
+            <point key="canvasLocation" x="-222.5" y="1926.5"/>
         </scene>
         <!--Courses-->
         <scene sceneID="A5k-iG-Cod">
@@ -604,7 +604,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3e-FT-LQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497.5" y="313.5"/>
+            <point key="canvasLocation" x="265.5" y="298.5"/>
         </scene>
         <!--Student's profile-->
         <scene sceneID="WdD-4b-ei3">
@@ -811,7 +811,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSw-Fr-NOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497.5" y="-454.5"/>
+            <point key="canvasLocation" x="265.5" y="-469.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E4Y-ji-PVL">
@@ -830,7 +830,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4o-xD-KWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9.5" y="-454.5"/>
+            <point key="canvasLocation" x="-222.5" y="-469.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="moW-x0-85F">
@@ -850,7 +850,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JjA-KP-qKE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10.5" y="313.5"/>
+            <point key="canvasLocation" x="-221.5" y="298.5"/>
         </scene>
         <!--Professor's profile-->
         <scene sceneID="Cmq-rk-xWj">
@@ -1034,7 +1034,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="toJ-CI-wPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497.5" y="2693.5"/>
+            <point key="canvasLocation" x="265.5" y="2678.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Yfx-LH-jHD">
@@ -1425,7 +1425,7 @@
                     </connections>
                 </tableView>
             </objects>
-            <point key="canvasLocation" x="9.5" y="2693.5"/>
+            <point key="canvasLocation" x="-222.5" y="2678.5"/>
         </scene>
         <!--Course's profile-->
         <scene sceneID="rcx-Bs-Woq">
@@ -1651,6 +1651,154 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPx-uE-omd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1478.5" y="1103.5"/>
+        </scene>
+        <!--Choose professor-->
+        <scene sceneID="ncY-u1-IwG">
+            <objects>
+                <tableViewController storyboardIdentifier="ChooseProfessor" id="1JA-7x-o9f" customClass="RJProfessorSelectionController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zFc-bj-jb3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Professor" id="IGP-Ly-t3Z" customClass="RJSelectionListCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IGP-Ly-t3Z" id="4eR-eC-Vyl">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qCi-sT-kGI">
+                                            <rect key="frame" x="206" y="11" width="158" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="courseCountLabel" destination="qCi-sT-kGI" id="SVM-Tb-sdK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1JA-7x-o9f" id="nmq-bZ-YSc"/>
+                            <outlet property="delegate" destination="1JA-7x-o9f" id="fEV-ha-8PM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Choose professor" id="tUV-bl-YZQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="b6G-me-eTd">
+                            <color key="tintColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="actionSaveButtonPushed:" destination="1JA-7x-o9f" id="G5G-47-juW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NUk-Bs-QJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="265.5" y="3464.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HBO-vR-cpL">
+            <objects>
+                <navigationController id="bAg-gk-bYa" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dHl-aV-biW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.90093074839999998" green="0.93025808789999997" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1JA-7x-o9f" kind="relationship" relationship="rootViewController" id="kWa-dc-RXm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H16-aW-yvL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-222.5" y="3464.5"/>
+        </scene>
+        <!--Choose courses-->
+        <scene sceneID="qeU-wp-7Ln">
+            <objects>
+                <tableViewController storyboardIdentifier="ChooseStudents" id="Vsr-bW-kl8" customClass="RJStudentSelectionController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="Grk-DO-viG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentToChoose" rowHeight="56" id="Jn6-Jx-5Ua" customClass="RJSelectionListCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jn6-Jx-5Ua" id="61z-sm-Abh">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e23-wO-Z2w">
+                                            <rect key="frame" x="30" y="17" width="136" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0d1-Aw-vQl">
+                                            <rect key="frame" x="174" y="8" width="151" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nso-Ya-0Ye">
+                                            <rect key="frame" x="161" y="26" width="164" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="0d1-Aw-vQl" id="tZL-hQ-r8K"/>
+                                    <outlet property="label" destination="e23-wO-Z2w" id="9qK-xd-Jeb"/>
+                                    <outlet property="subTitle" destination="nso-Ya-0Ye" id="hhO-pA-IiM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Vsr-bW-kl8" id="j87-Zb-hNQ"/>
+                            <outlet property="delegate" destination="Vsr-bW-kl8" id="4md-jF-5Rv"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Choose courses" id="UgD-0c-TyD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="lye-u3-JPq">
+                            <color key="tintColor" red="0.69411764710000001" green="0.30980392159999998" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="actionSaveButtonPushed:" destination="Vsr-bW-kl8" id="ata-O0-Wnj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oMb-8A-iBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="265.5" y="-1257.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KdZ-cn-Bh0">
+            <objects>
+                <navigationController id="UN5-EH-Fu2" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="H5y-80-ttu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.69346207380000002" green="0.31055781249999997" blue="1" alpha="0.67000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.90093074839999998" green="0.93025808789999997" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Vsr-bW-kl8" kind="relationship" relationship="rootViewController" id="QDf-kH-3SU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8q-uC-Vk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-221.5" y="-1257.5"/>
         </scene>
     </scenes>
     <resources>
