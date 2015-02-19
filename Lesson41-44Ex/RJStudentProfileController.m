@@ -9,6 +9,7 @@
 #import "RJStudentProfileController.h"
 #import "RJStudent.h"
 #import "RJDataManager.h"
+#import "RJStudentProfileCell.h"
 #import "RJUniversitySelectionController.h"
 #import "RJCoursesSelectionController.h"
 #import "RJCourse.h"
@@ -25,10 +26,10 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
 @interface RJStudentProfileController () <UITableViewDataSource, UITableViewDelegate, RJUniversityDelegate, RJCourseDelegate>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-@property (strong, nonatomic) RJTableViewCell *nameCell;
-@property (strong, nonatomic) RJTableViewCell *surnameCell;
-@property (strong, nonatomic) RJTableViewCell *scoreCell;
-@property (strong, nonatomic) RJTableViewCell *universityCell;
+@property (strong, nonatomic) RJStudentProfileCell *nameCell;
+@property (strong, nonatomic) RJStudentProfileCell *surnameCell;
+@property (strong, nonatomic) RJStudentProfileCell *scoreCell;
+@property (strong, nonatomic) RJStudentProfileCell *universityCell;
 
 @property (strong, nonatomic) RJUniversity *chosenUniversity;
 @property (strong, nonatomic) NSIndexPath *chosenIndexPath;
@@ -125,27 +126,27 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     static NSString *coursesField = @"Course";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:firstNameField];
+            RJStudentProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:firstNameField];
             if (!cell) {
-                cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:firstNameField];
+                cell = [[RJStudentProfileCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:firstNameField];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.firstNameField.text = self.firstName;
             self.nameCell = cell;
             return cell;
         } else if (indexPath.row == 1) {
-            RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:lastNameField];
+            RJStudentProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:lastNameField];
             if (!cell) {
-                cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:lastNameField];
+                cell = [[RJStudentProfileCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:lastNameField];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             self.surnameCell = cell;
             cell.lastNameField.text = self.lastName;
             return cell;
         } else if (indexPath.row == 2) {
-            RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:scoreField];
+            RJStudentProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:scoreField];
             if (!cell) {
-                cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:scoreField];
+                cell = [[RJStudentProfileCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:scoreField];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (!self.newStudent) {
@@ -155,9 +156,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
             self.scoreCell = cell;
             return cell;
         } else if (indexPath.row == 3) {
-            RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:universityField];
+            RJStudentProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:universityField];
             if (!cell) {
-                cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:universityField];
+                cell = [[RJStudentProfileCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:universityField];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.universityField.text = self.university.name;
@@ -172,9 +173,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
             return cell;
         }
     } else {
-        RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:coursesField];
+        RJStudentProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:coursesField];
         if (!cell) {
-            cell = [[RJTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:coursesField];
+            cell = [[RJStudentProfileCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:coursesField];
         }
         RJCourse *course = [self.chosenCourses objectAtIndex:indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

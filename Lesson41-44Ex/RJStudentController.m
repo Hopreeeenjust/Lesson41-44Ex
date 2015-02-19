@@ -180,6 +180,23 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        return 0;
+    } else {
+        return 28;
+    }
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *label = [UILabel new];
+    label.frame = CGRectMake(20, 4, CGRectGetWidth(tableView.bounds), 20);
+    label.font = [UIFont boldSystemFontOfSize:14];
+    label.text = [self tableView:tableView titleForHeaderInSection:section];
+    UIView *headerView = [UIView new];
+    headerView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.05f];
+    [headerView addSubview:label];
+    return headerView;
+}
 
 @end

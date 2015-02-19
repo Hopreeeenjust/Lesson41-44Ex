@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RJTableViewCell.h"
 
 @class RJStudent;
 @class RJUniversity;

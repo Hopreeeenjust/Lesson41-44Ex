@@ -9,6 +9,8 @@
 #import "RJProfessorController.h"
 #import "RJDataManager.h"
 #import "RJProfessor.h"
+#import "RJProfessorProfileController.h"
+#import "RJProfessorInfoCell.h"
 
 @interface RJProfessorController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -31,8 +33,9 @@
 #pragma mark - Actions
 
 - (IBAction)actionAddProfessor:(id)sender {
-//    [[RJDataManager sharedManager] addUniversity];
-//    [[RJDataManager sharedManager] saveContext];
+    RJProfessorProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProfessorEdit"];
+    vc.newProfessor = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -74,11 +77,41 @@
 
 #pragma mark - UITableViewDataSource
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(RJProfessorInfoCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RJProfessor *professor = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", professor.firstName, professor.lastName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Courses: %ld", [professor.courses count]];
+    cell.professorName.text = [NSString stringWithFormat:@"%@ %@", professor.firstName, professor.lastName];
+    if ([professor.courses count] == 1) {
+        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lectures on %ld course", [professor.courses count]];
+    } else {
+        cell.profesorsCourses.text = [NSString stringWithFormat:@"Lectures on %ld courses", [professor.courses count]];
+    }
+    cell.accessoryView.tintColor = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (RJProfessorInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"ProfessorCell";
+    RJProfessorInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[RJProfessorInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    RJStudent *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
+//    vc.student = student;
+//    vc.newStudent = NO;
+//    vc.firstName = student.firstName;
+//    vc.lastName = student.lastName;
+//    vc.score = student.score;
+//    vc.university = student.university;
+//    vc.coursesSet = student.courses;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

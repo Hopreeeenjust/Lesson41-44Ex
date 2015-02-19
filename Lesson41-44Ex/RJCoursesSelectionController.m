@@ -10,6 +10,9 @@
 #import "RJSelectionListCell.h"
 #import "RJCourse.h"
 #import "RJProfessor.h"
+#import "RJStudentProfileController.h"
+#import "RJProfessorProfileController.h"
+#import "RJUniversity.h"
 
 @interface RJCoursesSelectionController ()
 
@@ -19,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
+    [[UITableViewCell appearance] setTintColor:purple];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
     if (!self.indexPathForChosenCourses) {
         self.IndexPathForChosenCourses = [NSArray new];
@@ -72,15 +77,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"CourseToChoose";
+    RJCourse *course = [self.courses objectAtIndex:indexPath.row];
     RJSelectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[RJSelectionListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
-    RJCourse *course = [self.courses objectAtIndex:indexPath.row];
     cell.label.text = course.name;
     cell.detailLabel.text = [NSString stringWithFormat:@"Attendance: %ld", [course.students count]];
-    cell.subTitle.text = [NSString stringWithFormat:@"Professor %@ %@", course.professor.firstName, course.professor.lastName];
+    if ([self.previousController isKindOfClass:[RJStudentProfileController class]]) {
+        cell.subTitle.text = [NSString stringWithFormat:@"Professor %@ %@", course.professor.firstName, course.professor.lastName];
+    } else if ([self.previousController isKindOfClass:[RJProfessorProfileController class]]) {
+        cell.subTitle.text = course.university.name;
+    }
     return cell;
+
 }
 
 @end
