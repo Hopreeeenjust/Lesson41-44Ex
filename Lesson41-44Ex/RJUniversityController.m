@@ -23,7 +23,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
+    self.tabBarController.tabBar.tintColor = purple;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    UIColor *purple = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
+    [[UITabBar appearance] setBarTintColor:purple];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

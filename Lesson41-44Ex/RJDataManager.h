@@ -23,7 +23,4 @@
 
 + (RJDataManager *)sharedManager;
 
-- (void)a;
-
-
 @end

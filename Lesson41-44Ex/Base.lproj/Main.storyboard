@@ -157,11 +157,11 @@
             </objects>
             <point key="canvasLocation" x="2560" y="1104"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Universities-->
         <scene sceneID="3g1-AT-e2s">
             <objects>
                 <navigationController id="xHN-Dk-Fj8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="dCV-6L-6Uv"/>
+                    <tabBarItem key="tabBarItem" title="Universities" image="uni@2X.png" id="dCV-6L-6Uv"/>
                     <navigationItem key="navigationItem" id="1Xz-g8-yw4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -241,11 +241,11 @@
             </objects>
             <point key="canvasLocation" x="265.5" y="1926.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Professors-->
         <scene sceneID="9Rq-Vh-20W">
             <objects>
                 <navigationController id="2gz-hI-uFb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="downloads" id="saj-BT-gwb"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Professors" image="professorBar@2X.png" id="saj-BT-gwb"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5vD-KJ-8WA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -462,11 +462,11 @@
             </objects>
             <point key="canvasLocation" x="-1988.5" y="1103.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Courses-->
         <scene sceneID="q2l-TQ-maA">
             <objects>
                 <navigationController id="ZoJ-xV-PwF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostRecent" id="hXH-mV-fgu"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Courses" image="courseBar@2X.png" id="hXH-mV-fgu"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fYs-yi-PtX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -843,11 +843,11 @@
             </objects>
             <point key="canvasLocation" x="-222.5" y="-469.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Students-->
         <scene sceneID="moW-x0-85F">
             <objects>
                 <navigationController id="HfG-nt-8I1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="hKT-bC-4Vd"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Students" image="github.png" id="hKT-bC-4Vd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Chi-dj-LaU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2032,7 +2032,11 @@
     <resources>
         <image name="contact2.png" width="256" height="256"/>
         <image name="course@2X.png" width="256" height="256"/>
+        <image name="courseBar@2X.png" width="64" height="47"/>
+        <image name="github.png" width="32" height="32"/>
         <image name="professor@2X.png" width="256" height="256"/>
+        <image name="professorBar@2X.png" width="64" height="64"/>
+        <image name="uni@2X.png" width="64" height="47"/>
         <image name="university@2X.png" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

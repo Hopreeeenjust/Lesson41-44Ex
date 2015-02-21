@@ -21,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
+    UIColor *purple = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
+    [[UITabBar appearance] setBarTintColor:purple];
 }
 
 - (void)didReceiveMemoryWarning {

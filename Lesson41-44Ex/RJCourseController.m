@@ -135,4 +135,16 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    [super controller:controller didChangeObject:anObject atIndexPath:indexPath forChangeType:type newIndexPath:newIndexPath];
+    if ([anObject isKindOfClass:[RJCourse class]]) {
+        RJCourse *course = (RJCourse *)anObject;
+        if ([course.students count] == 0) {
+            [self.managedObjectContext deleteObject:course];
+        }
+    }
+}
+
+
+
 @end

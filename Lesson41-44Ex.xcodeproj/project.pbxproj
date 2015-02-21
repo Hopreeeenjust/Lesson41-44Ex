@@ -20,6 +20,13 @@
 		E0393E9F1A912CBF007C0A1A /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = E0393E9D1A912CBF007C0A1A /* 1.png */; };
 		E0393EA01A912CBF007C0A1A /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0393E9E1A912CBF007C0A1A /* 2.png */; };
 		E05341AD1A95291F008E9938 /* RJProfessorInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E05341AC1A95291F008E9938 /* RJProfessorInfoCell.m */; };
+		E06DE80B1A98C5F80039D8E0 /* uniBar@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE80A1A98C5F80039D8E0 /* uniBar@2X.png */; };
+		E06DE80D1A98CA070039D8E0 /* uniBarSelected@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE80C1A98CA070039D8E0 /* uniBarSelected@2X.png */; };
+		E06DE8111A98CC030039D8E0 /* uni@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE8101A98CC020039D8E0 /* uni@2X.png */; };
+		E06DE8151A98D0660039D8E0 /* courseBar@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE8121A98D0660039D8E0 /* courseBar@2X.png */; };
+		E06DE8161A98D0660039D8E0 /* github@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE8131A98D0660039D8E0 /* github@2x.png */; };
+		E06DE8171A98D0660039D8E0 /* professorBar@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE8141A98D0660039D8E0 /* professorBar@2X.png */; };
+		E06DE8191A98D2620039D8E0 /* githubSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E06DE8181A98D2620039D8E0 /* githubSelected@2x.png */; };
 		E089385C1A93411D00C1E497 /* back@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E089385B1A93411D00C1E497 /* back@2X.png */; };
 		E08938601A93517600C1E497 /* RJUniversitySelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E089385F1A93517600C1E497 /* RJUniversitySelectionController.m */; };
 		E08938631A9375A600C1E497 /* RJCoursesSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E08938621A9375A600C1E497 /* RJCoursesSelectionController.m */; };
@@ -590,6 +597,13 @@
 		E0393E9E1A912CBF007C0A1A /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		E05341AB1A95291F008E9938 /* RJProfessorInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProfessorInfoCell.h; sourceTree = "<group>"; };
 		E05341AC1A95291F008E9938 /* RJProfessorInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProfessorInfoCell.m; sourceTree = "<group>"; };
+		E06DE80A1A98C5F80039D8E0 /* uniBar@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uniBar@2X.png"; sourceTree = "<group>"; };
+		E06DE80C1A98CA070039D8E0 /* uniBarSelected@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uniBarSelected@2X.png"; sourceTree = "<group>"; };
+		E06DE8101A98CC020039D8E0 /* uni@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uni@2X.png"; sourceTree = "<group>"; };
+		E06DE8121A98D0660039D8E0 /* courseBar@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "courseBar@2X.png"; sourceTree = "<group>"; };
+		E06DE8131A98D0660039D8E0 /* github@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "github@2x.png"; sourceTree = "<group>"; };
+		E06DE8141A98D0660039D8E0 /* professorBar@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "professorBar@2X.png"; sourceTree = "<group>"; };
+		E06DE8181A98D2620039D8E0 /* githubSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "githubSelected@2x.png"; sourceTree = "<group>"; };
 		E089385B1A93411D00C1E497 /* back@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2X.png"; sourceTree = "<group>"; };
 		E089385E1A93517600C1E497 /* RJUniversitySelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJUniversitySelectionController.h; sourceTree = "<group>"; };
 		E089385F1A93517600C1E497 /* RJUniversitySelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJUniversitySelectionController.m; sourceTree = "<group>"; };
@@ -1179,10 +1193,10 @@
 		E0393E4A1A910759007C0A1A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E0A775CC1A92545800DF60CD /* RJProfessor.h */,
-				E0A775CD1A92545800DF60CD /* RJProfessor.m */,
 				E0A775C91A92545800DF60CD /* RJObject.h */,
 				E0A775CA1A92545800DF60CD /* RJObject.m */,
+				E0A775CC1A92545800DF60CD /* RJProfessor.h */,
+				E0A775CD1A92545800DF60CD /* RJProfessor.m */,
 				E0A775C61A92545800DF60CD /* RJCourse.h */,
 				E0A775C71A92545800DF60CD /* RJCourse.m */,
 				E0FDD1671A97298F00763F7B /* RJStudent.h */,
@@ -1196,6 +1210,13 @@
 		E0393E9C1A912CBF007C0A1A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E06DE8121A98D0660039D8E0 /* courseBar@2X.png */,
+				E06DE8131A98D0660039D8E0 /* github@2x.png */,
+				E06DE8181A98D2620039D8E0 /* githubSelected@2x.png */,
+				E06DE8141A98D0660039D8E0 /* professorBar@2X.png */,
+				E06DE8101A98CC020039D8E0 /* uni@2X.png */,
+				E06DE80C1A98CA070039D8E0 /* uniBarSelected@2X.png */,
+				E06DE80A1A98C5F80039D8E0 /* uniBar@2X.png */,
 				E0AF61AE1A973B9800ECA58B /* university@2X.png */,
 				E03746DB1A96424D00644DAC /* course@2X.png */,
 				E01AE8441A94E479003519F1 /* professor@2X.png */,
@@ -1988,6 +2009,7 @@
 				E09C3D921A9796EB00CF0C16 /* CF@2x.png in Resources */,
 				E09C3D8B1A9796EB00CF0C16 /* CA.png in Resources */,
 				E09C3E361A9796EB00CF0C16 /* KW.png in Resources */,
+				E06DE8161A98D0660039D8E0 /* github@2x.png in Resources */,
 				E09C3D6D1A9796EB00CF0C16 /* BH.png in Resources */,
 				E09C3DDB1A9796EB00CF0C16 /* GB@2x.png in Resources */,
 				E09C3DF11A9796EB00CF0C16 /* GQ@2x.png in Resources */,
@@ -2111,6 +2133,7 @@
 				E09C3E551A9796EB00CF0C16 /* MC@2x.png in Resources */,
 				E09C3DCD1A9796EB00CF0C16 /* FI@2x.png in Resources */,
 				E09C3DB31A9796EB00CF0C16 /* DE@2x.png in Resources */,
+				E06DE8171A98D0660039D8E0 /* professorBar@2X.png in Resources */,
 				E09C3E911A9796EB00CF0C16 /* NP@2x.png in Resources */,
 				E09C3E6E1A9796EB00CF0C16 /* MR.png in Resources */,
 				E09C3E2D1A9796EB00CF0C16 /* KI@2x.png in Resources */,
@@ -2172,9 +2195,11 @@
 				E09C3EEE1A9796EB00CF0C16 /* TD.png in Resources */,
 				E09C3EA81A9796EB00CF0C16 /* PM.png in Resources */,
 				E09C3F2D1A9796EB00CF0C16 /* YT@2x.png in Resources */,
+				E06DE80B1A98C5F80039D8E0 /* uniBar@2X.png in Resources */,
 				E09C3E3E1A9796EB00CF0C16 /* LB.png in Resources */,
 				E09C3E511A9796EB00CF0C16 /* LY@2x.png in Resources */,
 				E09C3ECB1A9796EB00CF0C16 /* SE@2x.png in Resources */,
+				E06DE8191A98D2620039D8E0 /* githubSelected@2x.png in Resources */,
 				E09C3DB71A9796EB00CF0C16 /* DK@2x.png in Resources */,
 				E09C3DAF1A9796EB00CF0C16 /* CY@2x.png in Resources */,
 				E0E206511A90CF3E009048B1 /* Main.storyboard in Resources */,
@@ -2183,6 +2208,7 @@
 				E0393EA01A912CBF007C0A1A /* 2.png in Resources */,
 				E09C3E6B1A9796EB00CF0C16 /* MP@2x.png in Resources */,
 				E09C3D5A1A9796EB00CF0C16 /* AU@2x.png in Resources */,
+				E06DE80D1A98CA070039D8E0 /* uniBarSelected@2X.png in Resources */,
 				E09C3DC91A9796EB00CF0C16 /* ES@2x.png in Resources */,
 				E09C3DC41A9796EB00CF0C16 /* EH.png in Resources */,
 				E09C3F081A9796EB00CF0C16 /* TW.png in Resources */,
@@ -2287,6 +2313,7 @@
 				E09C3E471A9796EB00CF0C16 /* LR@2x.png in Resources */,
 				E09C3D9D1A9796EB00CF0C16 /* CM.png in Resources */,
 				E09C3D621A9796EB00CF0C16 /* BA@2x.png in Resources */,
+				E06DE8111A98CC030039D8E0 /* uni@2X.png in Resources */,
 				E09C3D531A9796EB00CF0C16 /* AR.png in Resources */,
 				E09C3E5C1A9796EB00CF0C16 /* MG.png in Resources */,
 				E09C3F2C1A9796EB00CF0C16 /* YT.png in Resources */,
@@ -2316,6 +2343,7 @@
 				E03746DC1A96424D00644DAC /* course@2X.png in Resources */,
 				E09C3EEC1A9796EB00CF0C16 /* TC.png in Resources */,
 				E09C3E171A9796EB00CF0C16 /* IQ@2x.png in Resources */,
+				E06DE8151A98D0660039D8E0 /* courseBar@2X.png in Resources */,
 				E09C3E2F1A9796EB00CF0C16 /* KM@2x.png in Resources */,
 				E09C3EAA1A9796EB00CF0C16 /* PN.png in Resources */,
 				E09C3EA41A9796EB00CF0C16 /* PK.png in Resources */,

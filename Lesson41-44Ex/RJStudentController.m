@@ -33,7 +33,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
@@ -50,7 +49,7 @@
         self.universityDescriptor = nil;
     } else {
         self.sectionNameKeyPath = @"university.name";
-        self.universityDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"university" ascending:YES];
+        self.universityDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"university.name" ascending:YES];
     }
     self.fetchedResultsController = nil;
     [self.tableView reloadData];
