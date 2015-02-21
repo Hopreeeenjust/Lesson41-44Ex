@@ -65,17 +65,22 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     self.professors = [self getAllObjectsWithEntityName:@"RJProfessor" predicate:nil andSortDescriptors:@[firstNameDescriptor, lastNameDescriptor]];
 
     if (!self.newCourse) {
-//        self.chosenUniversity = self.university;
-//        NSPredicate *coursesPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
-//        self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:coursesPredicate andSortDescriptors:@[nameDescriptor]];
-//        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
-//        for (RJCourse *course in self.chosenCourses) {
-//            NSInteger rowOfChosenCourse = [self.courses indexOfObject:course];
-//            NSIndexPath *chosenCoursePath = [NSIndexPath indexPathForRow:rowOfChosenCourse inSection:0];
-//            [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] addObject:chosenCoursePath];
-//        }
-//        NSInteger row = [self.universities indexOfObject:self.university];
-//        self.chosenIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        self.chosenUniversity = self.university;
+        self.chosenProfessor = self.professor;
+        NSPredicate *studentsPredicate = [NSPredicate predicateWithFormat:@"university == %@", self.chosenUniversity];
+        self.students = [self getAllObjectsWithEntityName:@"RJStudent" predicate:studentsPredicate andSortDescriptors:@[firstNameDescriptor, lastNameDescriptor]];
+        self.chosenStudents = [[self.studentsSet allObjects] sortedArrayUsingDescriptors:@[firstNameDescriptor, lastNameDescriptor]];
+        for (RJStudent *student in self.chosenStudents) {
+            NSInteger rowOfChosenStudent = [self.students indexOfObject:student];
+            NSIndexPath *chosenStudentPath = [NSIndexPath indexPathForRow:rowOfChosenStudent inSection:0];
+            [[self mutableArrayValueForKey:@"indexPathForChosenStudents"] addObject:chosenStudentPath];
+        }
+        NSInteger universityRow = [self.universities indexOfObject:self.university];
+        self.chosenUniversityIndexPath = [NSIndexPath indexPathForRow:universityRow inSection:0];
+        if (self.professor) {
+            NSInteger professorRow = [self.professors indexOfObject:self.professor];
+            self.chosenProfessorIndexPath = [NSIndexPath indexPathForRow:professorRow inSection:0];
+        }
     }
 }
 
@@ -101,7 +106,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
         course.name = self.nameCell.name.text;
         course.object = self.objectCell.object.text;
         course.university = [self.universities objectAtIndex:self.chosenUniversityIndexPath.row];
-        course.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+        if (self.chosenProfessorIndexPath) {
+            course.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+        }
         course.students = [NSSet setWithArray:self.chosenStudents];
         [[RJDataManager sharedManager] saveContext];
     } else {
@@ -109,7 +116,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
         self.course.name = self.nameCell.name.text;
         self.course.object = self.objectCell.object.text;
         self.course.university = [self.universities objectAtIndex:self.chosenUniversityIndexPath.row];
-        self.course.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+        if (self.chosenProfessorIndexPath) {
+            self.course.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+        }
         self.course.students = [NSSet setWithArray:self.chosenStudents];
         [[RJDataManager sharedManager] saveContext];
     }
@@ -318,7 +327,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     self.name = self.nameCell.name.text;
     self.object = self.objectCell.object.text;
     self.university = [self.universities objectAtIndex:self.chosenUniversityIndexPath.row];
-    self.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+    if (self.chosenProfessorIndexPath) {
+        self.professor = [self.professors objectAtIndex:self.chosenProfessorIndexPath.row];
+    }
 }
 
 - (void)loadData {
@@ -326,7 +337,9 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     self.nameCell.name.text = self.name;
     self.objectCell.object.text = self.object;
     self.universityCell.university.text = self.university.name;
-    self.professorCell.professor.text = [NSString stringWithFormat:@"%@ %@", self.professor.firstName, self.professor.lastName];
+    if (self.professor) {
+        self.professorCell.professor.text = [NSString stringWithFormat:@"%@ %@", self.professor.firstName, self.professor.lastName];
+    }
 }
 
 #pragma mark - RJUniversityDelegate

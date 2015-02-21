@@ -11,6 +11,7 @@
 #import "RJUniversity.h"
 #import "RJStudent.h"
 #import "RJCourse.h"
+#import "RJProfessor.h"
 
 static NSString* firstNames[] = {
     @"Tran", @"Lenore", @"Bud", @"Fredda", @"Katrice",
@@ -60,7 +61,7 @@ static NSString* lastNames[] = {
 
 - (RJStudent *)addRandomStudent {
     RJStudent *student = [NSEntityDescription insertNewObjectForEntityForName:@"RJStudent" inManagedObjectContext:self.managedObjectContext];
-    student.score = @((float)arc4random_uniform(201) / 100.f + 2.f);
+    student.score = @((float)arc4random_uniform(701) / 100.f + 3.f);
     student.firstName = firstNames[arc4random_uniform(50)];
     student.lastName = lastNames[arc4random_uniform(50)];
     return student;
@@ -70,6 +71,18 @@ static NSString* lastNames[] = {
     RJCourse *course = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
     course.name = name;
     return course;
+}
+
+- (void)checkCoursesForDelete {
+    NSFetchRequest *request = [NSFetchRequest new];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"students.@count == %d", nil];
+    [request setEntity:entity];
+    [request setPredicate:predicate];
+    NSArray *allCoursesToDelete = [self.managedObjectContext executeFetchRequest:request error:nil];
+    for (RJCourse *course in allCoursesToDelete) {
+        [self.managedObjectContext deleteObject:course];
+    }
 }
 
 #pragma mark - Core Data stack
@@ -142,6 +155,7 @@ static NSString* lastNames[] = {
 - (void)saveContext {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
+//        [self checkCoursesForDelete];
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -161,19 +175,69 @@ static NSString* lastNames[] = {
 }
 
 - (void)a {
-    NSArray *cources = @[[self addCourseWithName:@"iOS"],
-                         [self addCourseWithName:@"Android"],
-                         [self addCourseWithName:@"PHP"],
-                         [self addCourseWithName:@"Javascript"],
-                         [self addCourseWithName:@"HTML"]];
-    RJUniversity *university = [self addUniversity];
-    [university addCourses:[NSSet setWithArray:cources]];
-    for (int i = 0; i < 100; i++) {
+//    NSArray *cources = @[[self addCourseWithName:@"iOS"],
+//                         [self addCourseWithName:@"Android"],
+//                         [self addCourseWithName:@"PHP"],
+//                         [self addCourseWithName:@"Javascript"],
+//                         [self addCourseWithName:@"HTML"]];
+    RJUniversity *mit = [NSEntityDescription insertNewObjectForEntityForName:@"RJUniversity" inManagedObjectContext:self.managedObjectContext];
+    mit.name = @"BSEU";
+    mit.country = @"Belarus";
+    mit.city = @"Minsk";
+    mit.rank = [NSNumber numberWithInteger:925];
+    RJCourse *swift = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    swift.name = @"Statistics";
+    swift.field = @"Exact science";
+    swift.object = @"Statistics";
+    swift.university = mit;
+    RJProfessor *pr1 = [NSEntityDescription insertNewObjectForEntityForName:@"RJProfessor" inManagedObjectContext:self.managedObjectContext];
+    pr1.firstName = @"Svetlana";
+    pr1.lastName = @"Belova";
+    swift.professor = pr1;
+    RJCourse *iOS = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    iOS.name = @"Micro Economics";
+    iOS.field = @"Economins";
+    iOS.object = @"Economic theory";
+    iOS.university = mit;
+//    RJProfessor *pr2 = [NSEntityDescription insertNewObjectForEntityForName:@"RJProfessor" inManagedObjectContext:self.managedObjectContext];
+//    pr2.firstName = @"Albert";
+//    pr2.lastName = @"Einstein";
+    iOS.professor = pr1;
+    RJCourse *php = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    php.name = @"Basics of jurisprudence";
+    php.field = @"Law";
+    php.object = @"Jurisprudence";
+    php.university = mit;
+    RJProfessor *pr3 = [NSEntityDescription insertNewObjectForEntityForName:@"RJProfessor" inManagedObjectContext:self.managedObjectContext];
+    pr3.firstName = @"Oleg";
+    pr3.lastName = @"Petrov";
+    php.professor = pr3;
+//    RJCourse *android = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+//    android.name = @"Pharmacology";
+//    android.field = @"Medicine";
+//    android.object = @"Pharmacology";
+//    android.university = mit;
+//    RJProfessor *pr5 = [NSEntityDescription insertNewObjectForEntityForName:@"RJProfessor" inManagedObjectContext:self.managedObjectContext];
+//    pr5.firstName = @"Carine";
+//    pr5.lastName = @"Roitfeld";
+//    android.professor = pr5;
+    RJCourse *ai = [NSEntityDescription insertNewObjectForEntityForName:@"RJCourse" inManagedObjectContext:self.managedObjectContext];
+    ai.name = @"English language";
+    ai.field = @"Humanities";
+    ai.object = @"Linguistics";
+    ai.university = mit;
+    RJProfessor *pr4 = [NSEntityDescription insertNewObjectForEntityForName:@"RJProfessor" inManagedObjectContext:self.managedObjectContext];
+    pr4.firstName = @"Veronika";
+    pr4.lastName = @"Tihonchuk";
+    ai.professor = pr4;
+    [mit addProfessors:[NSSet setWithArray:@[pr1, pr3, pr4, pr4]]];
+    NSArray *courses = @[swift, iOS, php, ai];
+    for (int i = 0; i < 25; i++) {
         RJStudent *student = [self addRandomStudent];
-        [university addStudentsObject:student];
-        NSInteger number = arc4random_uniform(5) + 1;
+        [mit addStudentsObject:student];
+        NSInteger number = arc4random_uniform(4) + 1;
         while ([student.courses count] < number) {
-            RJCourse *course = [cources objectAtIndex:arc4random_uniform(5)];
+            RJCourse *course = [courses objectAtIndex:arc4random_uniform(4)];
             if (![student.courses containsObject:course]) {
                 [student addCoursesObject:course];
             }

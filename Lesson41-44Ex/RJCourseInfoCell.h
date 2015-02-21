@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RJCourseInfoCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *courseName;
+@property (weak, nonatomic) IBOutlet UILabel *courseAttendance;
+@property (weak, nonatomic) IBOutlet UILabel *courseField;
 @end

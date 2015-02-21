@@ -11,7 +11,7 @@
 #import "RJSelectionListCell.h"
 
 @interface RJProfessorSelectionController ()
-
+@property (strong, nonatomic) RJProfessor *chosenProfessor;
 @end
 
 @implementation RJProfessorSelectionController
@@ -23,14 +23,7 @@
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
     if (self.lastIndexPath) {
         self.professor = [self.professors objectAtIndex:self.lastIndexPath.row];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.lastIndexPath) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.lastIndexPath];
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        self.chosenProfessor = self.professor;
     }
 }
 
@@ -73,10 +66,19 @@
     }
     RJProfessor *professor = [self.professors objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", professor.firstName, professor.lastName];
-    if (indexPath != self.lastIndexPath) {
+    if (![self.lastIndexPath isEqual:indexPath] && ![self.chosenProfessor isEqual:professor]) {
         cell.courseCountLabel.text = [NSString stringWithFormat:@"Teaches %ld courses", [professor.courses count]];
+    } else if ([self.lastIndexPath isEqual:indexPath] && ![self.chosenProfessor isEqual:professor]) {
+                cell.courseCountLabel.text = [NSString stringWithFormat:@"Teaches %ld courses", [professor.courses count] + 1];
+    } else if (![self.lastIndexPath isEqual:indexPath] && [self.chosenProfessor isEqual:professor]) {
+        cell.courseCountLabel.text = [NSString stringWithFormat:@"Teaches %ld courses", [professor.courses count] - 1];
     } else {
-        cell.courseCountLabel.text = [NSString stringWithFormat:@"Teaches %ld courses", [professor.courses count] + 1];
+        cell.courseCountLabel.text = [NSString stringWithFormat:@"Teaches %ld courses", [professor.courses count]];
+    }
+    if ([self.lastIndexPath isEqual:indexPath]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
     return cell;
 }

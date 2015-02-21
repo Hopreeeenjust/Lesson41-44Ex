@@ -21,8 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
-//    UIColor *purple = [UIColor colorWithRed:0.625f green:0.166f blue:0.999f alpha:0.67f];
-//    [[UITableViewCell appearance] setTintColor:purple];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,13 +34,7 @@
     return _managedObjectContext;
 }
 
-#pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-}
-
-#pragma mark - UITableViewDelegate
+#pragma mark - UITableViewDataSourse
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];

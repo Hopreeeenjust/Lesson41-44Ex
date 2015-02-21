@@ -26,16 +26,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.indexPathForChosenStudents) {
-        for (NSIndexPath *indexPath in self.indexPathForChosenStudents) {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        }
-    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -43,12 +33,8 @@
 #pragma mark - Actions
 
 - (IBAction)actionSaveButtonPushed:(UIBarButtonItem *)sender {
-    self.indexPathForChosenStudents = [NSArray new];
-    for (RJSelectionListCell *cell in self.tableView.visibleCells) {
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            [[self mutableArrayValueForKey:@"indexPathForChosenStudents"] addObject:[self.tableView indexPathForCell:cell]];
-        }
-    }
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"row" ascending:YES];
+    self.indexPathForChosenStudents = [self.indexPathForChosenStudents sortedArrayUsingDescriptors:@[descriptor]];
     [self.delegate didChooseStudentsAtIndexPath:self.indexPathForChosenStudents];
     [self.navigationController popToViewController:self.previousController animated:YES];
 }
@@ -60,8 +46,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [[self mutableArrayValueForKey:@"indexPathForChosenStudents"] removeObject:indexPath];
     } else {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[self mutableArrayValueForKey:@"indexPathForChosenStudents"] addObject:indexPath];
     }
 }
 
@@ -85,6 +73,11 @@
         cell.subTitle.text = [NSString stringWithFormat:@"Attend %ld courses", [student.courses count]];
     }
     cell.detailLabel.text = [NSString stringWithFormat:@"Score: %.2f", [student.score floatValue]];
+    if ([self.indexPathForChosenStudents containsObject:indexPath]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     return cell;
 }
 

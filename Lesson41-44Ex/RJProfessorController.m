@@ -88,8 +88,6 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
-#pragma mark - UITableViewDelegate
-
 - (RJProfessorInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"ProfessorCell";
     RJProfessorInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -99,6 +97,8 @@
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
+
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     RJProfessor *professor = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -111,6 +111,5 @@
     vc.coursesSet = professor.courses;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 @end

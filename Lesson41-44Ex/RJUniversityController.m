@@ -9,6 +9,8 @@
 #import "RJUniversityController.h"
 #import "RJDataManager.h"
 #import "RJUniversity.h"
+#import "RJUniversityProfileController.h"
+#import "RJUniversityInfoCell.h"
 
 @interface RJUniversityController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -21,20 +23,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.tabBarController.tabBar.tintColor = [UIColor colorWithRed:159/255 green:43/255 blue:255/255 alpha:0.67f];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
 
 - (IBAction)actionAddUniversity:(id)sender {
-//    [[RJDataManager sharedManager] a];
-//    [[RJDataManager sharedManager] saveContext];
-    
+    RJUniversityProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"UniversityEdit"];
+    vc.newUniversity = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -75,11 +75,38 @@
 
 #pragma mark - UITableViewDataSource
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(RJUniversityInfoCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RJUniversity *university = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = university.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Students: %ld", [university.students count]];
+    cell.universityName.text = university.name;
+    cell.universityCountry.text = university.country;
+    cell.universityRank.text = [NSString stringWithFormat:@"Rank: %ld", [university.rank integerValue]];
+    cell.universityStudents.text = [NSString stringWithFormat:@"Students: %ld", [university.students count]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+}
+
+- (RJUniversityInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"UniversityCell";
+    RJUniversityInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[RJUniversityInfoCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RJUniversity *university = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJUniversityProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"UniversityEdit"];
+    vc.university = university;
+    vc.newUniversity = NO;
+    vc.name = university.name;  
+    vc.country = university.country;
+    vc.city = university.city;
+    vc.rank = university.rank;
+    vc.professorsSet = university.professors;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -30,16 +30,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.indexPathForChosenUniversities) {
-        for (NSIndexPath *indexPath in self.indexPathForChosenUniversities) {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        }
-    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -47,12 +37,8 @@
 #pragma mark - Actions
 
 - (void)actionSaveButtonPushed:(UIBarButtonItem *)sender {
-    self.indexPathForChosenUniversities = [NSArray new];
-    for (UITableViewCell *cell in self.tableView.visibleCells) {
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            [[self mutableArrayValueForKey:@"indexPathForChosenUniversities"] addObject:[self.tableView indexPathForCell:cell]];
-        }
-    }
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"row" ascending:YES];
+    self.indexPathForChosenUniversities = [self.indexPathForChosenUniversities sortedArrayUsingDescriptors:@[descriptor]];
     [self.delegate didChooseUniversitiesAtIndexPath:self.indexPathForChosenUniversities];
     [self.navigationController popToViewController:self.previousController animated:YES];
 }
@@ -64,8 +50,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [[self mutableArrayValueForKey:@"indexPathForChosenUniversities"] removeObject:indexPath];
     } else {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[self mutableArrayValueForKey:@"indexPathForChosenUniversities"] addObject:indexPath];
     }
 }
 
@@ -83,6 +71,11 @@
     }
     RJUniversity *university = [self.universities objectAtIndex:indexPath.row];
     cell.textLabel.text = university.name;
+    if ([self.indexPathForChosenUniversities containsObject:indexPath]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     return cell;
 }
 

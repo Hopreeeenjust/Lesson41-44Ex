@@ -53,10 +53,15 @@ typedef NS_ENUM(NSInteger, RJFieldType) {
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     self.universities = [self getAllObjectsWithEntityName:@"RJUniversity" predicate:nil andSortDescriptors:@[nameDescriptor]];
     if (!self.newProfessor) {
-        self.chosenUniversities = [[self.universitiesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
+        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
+        //as i add an option of automatic delete of unused courses or universities from list, i have to make this check below to find out what chousenCourses are actual for situation
+        if ([[self valueForKeyPath:@"chosenCourses.@distinctUnionOfObjects.university"] count] > [[self.universitiesSet allObjects] count]) {
+            self.chosenUniversities = [[self valueForKeyPath:@"chosenCourses.@distinctUnionOfObjects.university"] sortedArrayUsingDescriptors:@[nameDescriptor]];
+        } else {
+            self.chosenUniversities = [[self.universitiesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
+        }
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"university IN %@ AND (professor == nil OR professor == %@)" , self.chosenUniversities, self.professor];
         self.courses = [self getAllObjectsWithEntityName:@"RJCourse" predicate:predicate andSortDescriptors:@[nameDescriptor]];
-        self.chosenCourses = [[self.coursesSet allObjects] sortedArrayUsingDescriptors:@[nameDescriptor]];
         for (RJCourse *course in self.chosenCourses) {
             NSInteger rowOfChosenCourse = [self.courses indexOfObject:course];
             NSIndexPath *chosenCoursePath = [NSIndexPath indexPathForRow:rowOfChosenCourse inSection:0];

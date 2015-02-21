@@ -26,14 +26,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.lastIndexPath) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.lastIndexPath];
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -72,6 +64,11 @@
     }
     RJUniversity *university = [self.universities objectAtIndex:indexPath.row];
     cell.textLabel.text = university.name;
+    if ([self.lastIndexPath isEqual:indexPath]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     return cell;
 }
 

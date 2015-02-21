@@ -18,23 +18,26 @@
         <relationship name="universities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RJUniversity" inverseName="professors" inverseEntity="RJUniversity" syncable="YES"/>
     </entity>
     <entity name="RJStudent" representedClassName="RJStudent" parentEntity="RJObject" syncable="YES">
-        <attribute name="firstName" optional="YES" attributeType="String" minValueString="2" syncable="YES"/>
-        <attribute name="lastName" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RJCourse" inverseName="students" inverseEntity="RJCourse" syncable="YES"/>
         <relationship name="university" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RJUniversity" inverseName="students" inverseEntity="RJUniversity" syncable="YES"/>
     </entity>
     <entity name="RJUniversity" representedClassName="RJUniversity" parentEntity="RJObject" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RJCourse" inverseName="university" inverseEntity="RJCourse" syncable="YES"/>
         <relationship name="professors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RJProfessor" inverseName="universities" inverseEntity="RJProfessor" syncable="YES"/>
         <relationship name="students" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RJStudent" inverseName="university" inverseEntity="RJStudent" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RJCourse" positionX="106" positionY="135" width="128" height="133"/>
-        <element name="RJObject" positionX="90" positionY="-180" width="128" height="43"/>
+        <element name="RJCourse" positionX="106" positionY="144" width="128" height="133"/>
+        <element name="RJObject" positionX="90" positionY="-162" width="128" height="43"/>
         <element name="RJProfessor" positionX="268" positionY="18" width="128" height="103"/>
-        <element name="RJStudent" positionX="-162" positionY="50" width="128" height="118"/>
-        <element name="RJUniversity" positionX="25" positionY="-9" width="128" height="103"/>
+        <element name="RJStudent" positionX="-189" positionY="8" width="128" height="118"/>
+        <element name="RJUniversity" positionX="18" positionY="-45" width="128" height="148"/>
     </elements>
 </model>

@@ -120,8 +120,6 @@
     return [self.fetchedResultsController sectionIndexTitles];
 }
 
-#pragma mark - UITableViewDelegate
-
 - (RJStudentInfoCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"StudentCell";
     static NSString *identifierTwo = @"StudentCellInUniversitySection";
@@ -142,19 +140,6 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    RJStudent *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
-    vc.student = student;
-    vc.newStudent = NO;
-    vc.firstName = student.firstName;
-    vc.lastName = student.lastName;
-    vc.score = student.score;
-    vc.university = student.university;
-    vc.coursesSet = student.courses;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 28;
 }
@@ -169,5 +154,21 @@
     [headerView addSubview:label];
     return headerView;
 }
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RJStudent *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    RJStudentProfileController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"StudentEdit"];
+    vc.student = student;
+    vc.newStudent = NO;
+    vc.firstName = student.firstName;
+    vc.lastName = student.lastName;
+    vc.score = student.score;
+    vc.university = student.university;
+    vc.coursesSet = student.courses;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

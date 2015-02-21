@@ -30,16 +30,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.indexPathForChosenCourses) {
-        for (NSIndexPath *indexPath in self.indexPathForChosenCourses) {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        }
-    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -47,12 +37,8 @@
 #pragma mark - Actions
 
 - (IBAction)actionSaveButtonPushed:(UIBarButtonItem *)sender {
-    self.indexPathForChosenCourses = [NSArray new];
-    for (RJSelectionListCell *cell in self.tableView.visibleCells) {
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] addObject:[self.tableView indexPathForCell:cell]];
-        }
-    }
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"row" ascending:YES];
+    self.indexPathForChosenCourses = [self.indexPathForChosenCourses sortedArrayUsingDescriptors:@[descriptor]];
     [self.delegate didChooseCoursesAtIndexPath:self.indexPathForChosenCourses];
     [self.navigationController popToViewController:self.previousController animated:YES];
 }
@@ -64,8 +50,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] removeObject:indexPath];
     } else {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[self mutableArrayValueForKey:@"indexPathForChosenCourses"] addObject:indexPath];
     }
 }
 
@@ -92,6 +80,11 @@
             cell.detailLabel.text = [NSString stringWithFormat:@"Applications: %ld", [course.students count]];
             cell.subTitle.text = @"No professor for this course yet";
         }
+        if ([self.indexPathForChosenCourses containsObject:indexPath]) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+        }
         return cell;
     } else if ([self.previousController isKindOfClass:[RJProfessorProfileController class]]) {
         RJSelectionListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierMulti];
@@ -105,6 +98,11 @@
             cell.universityLabel.text = [NSString stringWithFormat:@"Applications: %ld", [course.students count]];
         }
         cell.subTitle.text = course.university.name;
+        if ([self.indexPathForChosenCourses containsObject:indexPath]) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+        }
         return cell;
     }
     return nil;
